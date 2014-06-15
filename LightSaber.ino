@@ -1,39 +1,71 @@
 #include <FastLED.h>
 #include "Rotary.h"
+#include "Program.h"
 
+#define PROGRAM_COUNT 3
+
+#define HUECRAWLUP 0
+#define HUECRAWLDOWN 1
+#define SPARKLE 2
+
+#include "HueCrawl.h"
+#include "Sparkle.h"
+
+byte currentProgram = 0;
  
 CRGB leds[32];
 
-CHSV color;
-
 Rotary rotary = Rotary(11, 12);
 
-// the setup routine runs once when you press reset:
+
+// Get prgrams ready
+HueCrawl hueCrawl = HueCrawl();
+Sparkle sparkle = Sparkle();
+
+
 void setup() {
   FastLED.addLeds<LPD8806, 2, 3, RGB>(leds, 32);  
   FastLED.setBrightness(20);
   FastLED.show();
   
-  color = CHSV(0,255,255);
+  Serial.begin(9600);
+
+  hueCrawl.setLEDs(leds);
+  sparkle.setLEDs(leds);
+
+  hueCrawl.start();
 }
 
-// the loop routine runs over and over again forever:
 void loop() {
   unsigned char rotaryResult = rotary.process();
 
   if (rotaryResult == DIR_CW) {
-    color.h += 10;
+    if (currentProgram < PROGRAM_COUNT - 1 ) {
+      currentProgram++;
+    } else {
+      currentProgram = 0;
+    }
   } else if (rotaryResult == DIR_CCW) {
-    color.h -= 10;
+    if (currentProgram > 0) {
+      currentProgram--;
+    } else {
+      currentProgram = PROGRAM_COUNT - 1;
+    }
   }
 
+  switch (currentProgram) {
+    case HUECRAWLUP:
+      hueCrawl.upward = true;
+      hueCrawl.update();
+      break;
 
-  // color.h++;
-  for (byte i = 0; i < 32; i++) {
-    CHSV c = color;
-    c.h -= i*8;
-    leds[i] = c;
+    case HUECRAWLDOWN:
+      hueCrawl.upward = false;
+      hueCrawl.update();
+      break;
+
+    case SPARKLE:
+      sparkle.update();
+      break;
   }
-  FastLED.show();
-
 }
