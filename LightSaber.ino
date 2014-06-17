@@ -2,11 +2,10 @@
 #include "Rotary.h"
 #include "Program.h"
 
-#define PROGRAM_COUNT 3
+#define PROGRAM_COUNT 2
 
-#define HUECRAWLUP 0
-#define HUECRAWLDOWN 1
-#define SPARKLE 2
+#define HUECRAWL 0
+#define SPARKLE 1
 
 #include "HueCrawl.h"
 #include "Sparkle.h"
@@ -16,7 +15,6 @@ byte currentProgram = 0;
 CRGB leds[32];
 
 Rotary rotary = Rotary(11, 12);
-
 
 // Get prgrams ready
 HueCrawl hueCrawl = HueCrawl();
@@ -34,6 +32,7 @@ void setup() {
   sparkle.setLEDs(leds);
 
   hueCrawl.start();
+  sparkle.start();
 }
 
 void loop() {
@@ -54,13 +53,7 @@ void loop() {
   }
 
   switch (currentProgram) {
-    case HUECRAWLUP:
-      hueCrawl.upward = true;
-      hueCrawl.update();
-      break;
-
-    case HUECRAWLDOWN:
-      hueCrawl.upward = false;
+    case HUECRAWL:
       hueCrawl.update();
       break;
 

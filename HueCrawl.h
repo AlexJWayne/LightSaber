@@ -6,7 +6,7 @@
 class HueCrawl : public Program {
   public:
     CHSV color;
-    bool upward;
+    int hueCounter;
 
     void start();
     void update();

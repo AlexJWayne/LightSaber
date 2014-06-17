@@ -3,6 +3,8 @@
 
 #include <FastLED.h>
 
+#define POT_PIN 4
+
 class Program {
   public:
     CRGB *leds;
