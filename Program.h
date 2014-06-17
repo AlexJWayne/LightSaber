@@ -12,6 +12,8 @@ class Program {
     void setLEDs(CRGB leds[]);
     virtual void start()  {};
     virtual void update() {};
+
+    int mapDial(int min, int max);
 };
 
 #endif

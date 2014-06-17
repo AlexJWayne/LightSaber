@@ -5,7 +5,7 @@ void Sparkle::start() {
 };
 
 void Sparkle::update() {
-  int threshold = 1024 - analogRead(POT_PIN);
+  int threshold = mapDial(255, 0);
 
   for (byte i = 0; i < 32; i++) {
     if (random(4096) < threshold) {
