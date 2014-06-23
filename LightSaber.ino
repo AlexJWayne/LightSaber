@@ -1,4 +1,6 @@
+#include <Wire.h>
 #include <FastLED.h>
+#include <Adafruit_Sensor.h>
 #include <Adafruit_ADXL345_U.h>
 
 #include "Rotary.h"
@@ -7,8 +9,8 @@
 #define PROGRAM_COUNT 3
 
 #define HUECRAWL 0
-#define SPARKLE 1
-#define SOLIDCOLOR 2
+#define SOLIDCOLOR 1
+#define SPARKLE 2
 
 #include "HueCrawl.h"
 #include "Sparkle.h"
@@ -21,18 +23,22 @@ CRGB leds[32];
 
 Rotary rotary = Rotary(11, 12);
 
-// Get prgrams ready
+// Get programs ready
 HueCrawl hueCrawl = HueCrawl();
 Sparkle sparkle = Sparkle();
 SolidColor solidColor = SolidColor();
 
+// Accelerometer
+Adafruit_ADXL345_Unified accel = Adafruit_ADXL345_Unified(12345);
+
+void setupLEDs();
+void setupAccel();
 
 void setup() {
-  FastLED.addLeds<LPD8806, 2, 3, GRB>(leds, 32);  
-  FastLED.setBrightness(20);
-  FastLED.show();
-  
   Serial.begin(9600);
+
+  setupLEDs();
+  // setupAccel();
 
   setProgram();
 
@@ -44,6 +50,20 @@ void setup() {
 
   solidColor.setLEDs(leds);
   solidColor.start();
+}
+
+void setupLEDs() {
+  FastLED.addLeds<LPD8806, 7, 8, GRB>(leds, 32);  
+  FastLED.setBrightness(20);
+  FastLED.show();
+}
+
+void setupAccel() {
+  sensor_t sensor;
+  accel.getSensor(&sensor);
+  if (accel.begin()) {
+    accel.setRange(ADXL345_RANGE_4_G);
+  }
 }
 
 void loop() {
@@ -67,6 +87,14 @@ void loop() {
   }
 
   currentProgram->update();
+
+
+  ///
+
+
+  // sensors_event_t event; 
+  // accel.getEvent(&event);
+  // Serial.println(event.acceleration.x);
 }
 
 void setProgram() {

@@ -3,7 +3,7 @@
 
 #include <FastLED.h>
 
-#define POT_PIN 4
+#define POT_PIN 3
 
 class Program {
   public:
