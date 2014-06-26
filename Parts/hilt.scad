@@ -1,4 +1,4 @@
-tubeRadius = 21;
+tubeRadius = 20.9;
 tubeLip = 5;
 
 hiltHeight = 25;
