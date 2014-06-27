@@ -1,7 +1,8 @@
 #include "Program.h"
 
-void Program::setLEDs(CRGB _leds[]) {
+void Program::setup(CRGB _leds[], Switch &_button) {
   leds = _leds;
+  button = &_button;
 }
 
 int Program::mapDial(int min, int max) {

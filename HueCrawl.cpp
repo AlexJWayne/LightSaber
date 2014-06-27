@@ -3,12 +3,18 @@
 void HueCrawl::start() {
   color = CHSV(0, 0xFF, 0xFF);
   hueCounter = 0;
+  upward = true;
 };
 
 void HueCrawl::update() {
   const byte maxSpeed = 160;
 
-  hueCounter += mapDial(maxSpeed, -maxSpeed);
+
+  if (button->pushed()) {
+    upward = !upward;
+  }
+
+  hueCounter += mapDial(upward ? maxSpeed : -maxSpeed, 0);
 
   // 16 bits down to 8
   color.h = hueCounter >> 8;

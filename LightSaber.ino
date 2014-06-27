@@ -1,20 +1,26 @@
 #include <Wire.h>
 #include <FastLED.h>
-#include <Adafruit_Sensor.h>
-#include <Adafruit_ADXL345_U.h>
 
 #include "Rotary.h"
+#include "Switch.h"
+
 #include "Program.h"
 
-#define PROGRAM_COUNT 3
+#define PROGRAM_COUNT 6
 
 #define HUECRAWL 0
 #define SOLIDCOLOR 1
 #define SPARKLE 2
+#define FLICKER 3
+#define BUBBLE 4
+#define GAUGE 5
 
 #include "HueCrawl.h"
 #include "Sparkle.h"
 #include "SolidColor.h"
+#include "Flicker.h"
+#include "Bubble.h"
+#include "Gauge.h"
 
 byte currentProgramIdx = 0;
 Program *currentProgram;
@@ -22,14 +28,15 @@ Program *currentProgram;
 CRGB leds[32];
 
 Rotary rotary = Rotary(11, 12);
+Switch button = Switch(5);
 
 // Get programs ready
 HueCrawl hueCrawl = HueCrawl();
 Sparkle sparkle = Sparkle();
 SolidColor solidColor = SolidColor();
-
-// Accelerometer
-Adafruit_ADXL345_Unified accel = Adafruit_ADXL345_Unified(12345);
+Flicker flicker = Flicker();
+Bubble bubble = Bubble();
+Gauge gauge = Gauge();
 
 void setupLEDs();
 void setupAccel();
@@ -38,36 +45,26 @@ void setup() {
   Serial.begin(9600);
 
   setupLEDs();
-  // setupAccel();
+
+  hueCrawl.setup(leds, button);
+  sparkle.setup(leds, button);
+  solidColor.setup(leds, button);
+  flicker.setup(leds, button);
+  bubble.setup(leds, button);
+  gauge.setup(leds, button);
 
   setProgram();
-
-  hueCrawl.setLEDs(leds);
-  hueCrawl.start();
-
-  sparkle.setLEDs(leds);
-  sparkle.start();
-
-  solidColor.setLEDs(leds);
-  solidColor.start();
 }
 
 void setupLEDs() {
   FastLED.addLeds<LPD8806, 7, 8, GRB>(leds, 32);  
-  FastLED.setBrightness(20);
+  FastLED.setBrightness(30);
   FastLED.show();
-}
-
-void setupAccel() {
-  sensor_t sensor;
-  accel.getSensor(&sensor);
-  if (accel.begin()) {
-    accel.setRange(ADXL345_RANGE_4_G);
-  }
 }
 
 void loop() {
   unsigned char rotaryResult = rotary.process();
+  button.poll();
 
   if (rotaryResult == DIR_CW) {
     if (currentProgramIdx < PROGRAM_COUNT - 1) {
@@ -87,27 +84,34 @@ void loop() {
   }
 
   currentProgram->update();
-
-
-  ///
-
-
-  // sensors_event_t event; 
-  // accel.getEvent(&event);
-  // Serial.println(event.acceleration.x);
 }
 
 void setProgram() {
   switch (currentProgramIdx) {
-      case HUECRAWL:
-        currentProgram = &hueCrawl;
-        break;
+    case HUECRAWL:
+      currentProgram = &hueCrawl;
+      break;
 
-      case SPARKLE:
-        currentProgram = &sparkle;
-        break;
+    case SOLIDCOLOR:
+      currentProgram = &solidColor;
+      break;
 
-      case SOLIDCOLOR:
-        currentProgram = &solidColor;
+    case SPARKLE:
+      currentProgram = &sparkle;
+      break;
+
+    case FLICKER:
+      currentProgram = &flicker;
+      break;
+
+    case BUBBLE:
+      currentProgram = &bubble;
+      break;
+
+    case GAUGE:
+      currentProgram = &gauge;
+      break;
   }
+
+  currentProgram->start();
 }
