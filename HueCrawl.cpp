@@ -10,9 +10,9 @@ void HueCrawl::update() {
   const byte maxSpeed = 160;
 
 
-  if (button->pushed()) {
-    upward = !upward;
-  }
+  // if (button->pushed()) {
+  //   upward = !upward;
+  // }
 
   hueCounter += mapDial(upward ? maxSpeed : -maxSpeed, 0);
 

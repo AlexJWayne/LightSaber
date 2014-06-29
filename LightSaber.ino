@@ -1,5 +1,6 @@
 #include <Wire.h>
 #include <FastLED.h>
+#include "AccelSensor.h"
 
 #include "Rotary.h"
 #include "Switch.h"
@@ -29,6 +30,8 @@ CRGB leds[32];
 
 Rotary rotary = Rotary(11, 12);
 Switch button = Switch(5);
+Adafruit_ADXL345_Unified accelSensorRaw = Adafruit_ADXL345_Unified(12345);
+AccelSensor accel = AccelSensor();
 
 // Get programs ready
 HueCrawl hueCrawl = HueCrawl();
@@ -43,15 +46,16 @@ void setupAccel();
 
 void setup() {
   Serial.begin(9600);
+  accel.start(accelSensorRaw);
 
   setupLEDs();
 
-  hueCrawl.setup(leds, button);
-  sparkle.setup(leds, button);
-  solidColor.setup(leds, button);
-  flicker.setup(leds, button);
-  bubble.setup(leds, button);
-  gauge.setup(leds, button);
+  hueCrawl.setup(leds, button, accel);
+  sparkle.setup(leds, button, accel);
+  solidColor.setup(leds, button, accel);
+  flicker.setup(leds, button, accel);
+  bubble.setup(leds, button, accel);
+  gauge.setup(leds, button, accel);
 
   setProgram();
 }
@@ -65,6 +69,7 @@ void setupLEDs() {
 void loop() {
   unsigned char rotaryResult = rotary.process();
   button.poll();
+  accel.update();
 
   if (rotaryResult == DIR_CW) {
     if (currentProgramIdx < PROGRAM_COUNT - 1) {

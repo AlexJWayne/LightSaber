@@ -7,10 +7,10 @@ void Bubble::start() {
 void Bubble::update() {
   const byte radius = 64;
 
-  if (button->pushed()) {
-    colorID++;
-    if (colorID > 7) colorID = 0;
-  }
+  // if (button->pushed()) {
+  //   colorID++;
+  //   if (colorID > 7) colorID = 0;
+  // }
 
   CHSV color;
   if (colorID == 0) {
