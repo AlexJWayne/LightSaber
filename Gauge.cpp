@@ -7,18 +7,23 @@ void Gauge::start() {
 void Gauge::update() {
   const byte radius = 64;
 
-  CHSV color;
-  if (colorID == 0) {
-    color = CHSV(0, 0, 0xFF);
-  } else {
-    color = CHSV(0xFF * (colorID - 1)*2/12, 0xFF, 0xFF);
-  }
-
   byte pos = mapDial(32, 0);
 
   for (byte i = 0; i < 32; i++) {
     if (i < pos) {
-      leds[i] = color;
+      if (i < 16) {
+        leds[i] = CRGB(
+          map(i, 0, 15, 0, 0xFF),
+          0xFF,
+          0
+        );
+      } else {
+        leds[i] = CRGB(
+          0xFF,
+          map(i, 16, 31, 0xFF, 0),
+          0
+        );
+      }
     } else {
       leds[i] = CRGB::Black;
     }

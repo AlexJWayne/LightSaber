@@ -8,6 +8,7 @@ void Bubble::start() {
 void Bubble::update() {
   const byte speed = 192;
   const byte radius = 64;
+  const byte innerRadius = 48;
   const int maxPos16 = 0xFFFF;
   const int minPos16 = 0;
 
@@ -36,7 +37,8 @@ void Bubble::update() {
   }
 
   for (byte i = 0; i < 32; i++) {
-    int brightness = radius - abs(pos8 - i*8);
+    int brightness      = radius - abs(pos8 - i*8);
+    int innerBrightness = innerRadius - abs(pos8 - i*8);
 
     if (brightness > 0) {
       color.v = ease8InOutCubic((brightness << 2) - 1);
@@ -45,6 +47,12 @@ void Bubble::update() {
       leds[i] = CRGB::Black;
     }
     
+    if (innerBrightness > 0) {
+      CHSV inner = CHSV(0, 0, innerBrightness);
+      inner.v = dim8_raw(ease8InOutCubic((innerBrightness << 2) - 1));
+      leds[i] += inner;
+    }
+
   }
 
   FastLED.show();
