@@ -7,11 +7,6 @@ void Gauge::start() {
 void Gauge::update() {
   const byte radius = 64;
 
-  // if (button->pushed()) {
-  //   colorID++;
-  //   if (colorID > 7) colorID = 0;
-  // }
-
   CHSV color;
   if (colorID == 0) {
     color = CHSV(0, 0, 0xFF);

@@ -5,8 +5,10 @@
 
 class Bubble : public Program {
   public:
-    byte colorID;
-    
+    bool isMoving;
+    uint16_t lastPos16;
+    uint16_t hue16;
+
     void start();
     void update();
 };

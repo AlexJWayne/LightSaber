@@ -1,25 +1,39 @@
 #include "Bubble.h"
 
 void Bubble::start() {
-  colorID = 0;
+  isMoving = false;
+  hue16 = 0;
 };
 
 void Bubble::update() {
+  const byte speed = 192;
   const byte radius = 64;
+  const int maxPos16 = 0xFFFF;
+  const int minPos16 = 0;
 
-  // if (button->pushed()) {
-  //   colorID++;
-  //   if (colorID > 7) colorID = 0;
-  // }
-
-  CHSV color;
-  if (colorID == 0) {
-    color = CHSV(0, 0, 0xFF);
-  } else {
-    color = CHSV(0xFF * (colorID - 1)*2/12, 0xFF, 0xFF);
+  if (button->on() && millis() - button->pushedTime > 500) {
+    Serial.println(button->pushedTime);
+    hue16 += 64;
   }
 
-  byte pos8 = mapDial(255, 0);
+  CHSV color = CHSV(hue16 >> 8, 0xFF, 0xFF);
+
+  int pos8;
+
+  if (isMoving) {
+    lastPos16 += mapDial(speed, 0);
+    
+    pos8 = map(lastPos16, 0, 0xFFFF, -radius, 0xFF+radius);
+  } else {
+    pos8 = mapDial(0xFF + radius, -radius);
+  }
+
+  if (button->released() && millis() - button->pushedTime < 500) {
+    isMoving = !isMoving;
+    if (isMoving) {
+      lastPos16 = pos8 << 8;
+    }
+  }
 
   for (byte i = 0; i < 32; i++) {
     int brightness = radius - abs(pos8 - i*8);
