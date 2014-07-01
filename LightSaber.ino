@@ -117,6 +117,4 @@ void setProgram() {
       currentProgram = &gauge;
       break;
   }
-
-  currentProgram->start();
 }

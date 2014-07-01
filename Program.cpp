@@ -5,6 +5,8 @@ void Program::setup(CRGB _leds[], Switch &_button, AccelSensor &_accel) {
   button = &_button;
   accel = &_accel;
   useAccel = false;
+
+  start();
 }
 
 int Program::mapDial(int min, int max) {
