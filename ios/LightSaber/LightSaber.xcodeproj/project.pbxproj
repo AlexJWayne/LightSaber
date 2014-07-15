@@ -1,0 +1,418 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FA48656D1974FFBF0049A45D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48656C1974FFBF0049A45D /* AppDelegate.swift */; };
+		FA48656F1974FFBF0049A45D /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48656E1974FFBF0049A45D /* MasterViewController.swift */; };
+		FA4865711974FFBF0049A45D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4865701974FFBF0049A45D /* DetailViewController.swift */; };
+		FA4865741974FFBF0049A45D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4865721974FFBF0049A45D /* Main.storyboard */; };
+		FA4865761974FFBF0049A45D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA4865751974FFBF0049A45D /* Images.xcassets */; };
+		FA4865821974FFBF0049A45D /* LightSaberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4865811974FFBF0049A45D /* LightSaberTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FA48657C1974FFBF0049A45D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA48655F1974FFBF0049A45D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA4865661974FFBF0049A45D;
+			remoteInfo = LightSaber;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FA4865671974FFBF0049A45D /* LightSaber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightSaber.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA48656B1974FFBF0049A45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA48656C1974FFBF0049A45D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FA48656E1974FFBF0049A45D /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		FA4865701974FFBF0049A45D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		FA4865731974FFBF0049A45D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FA4865751974FFBF0049A45D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FA48657B1974FFBF0049A45D /* LightSaberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightSaberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA4865801974FFBF0049A45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA4865811974FFBF0049A45D /* LightSaberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightSaberTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FA4865641974FFBF0049A45D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA4865781974FFBF0049A45D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FA48655E1974FFBF0049A45D = {
+			isa = PBXGroup;
+			children = (
+				FA4865691974FFBF0049A45D /* LightSaber */,
+				FA48657E1974FFBF0049A45D /* LightSaberTests */,
+				FA4865681974FFBF0049A45D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FA4865681974FFBF0049A45D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA4865671974FFBF0049A45D /* LightSaber.app */,
+				FA48657B1974FFBF0049A45D /* LightSaberTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FA4865691974FFBF0049A45D /* LightSaber */ = {
+			isa = PBXGroup;
+			children = (
+				FA48656C1974FFBF0049A45D /* AppDelegate.swift */,
+				FA48656E1974FFBF0049A45D /* MasterViewController.swift */,
+				FA4865701974FFBF0049A45D /* DetailViewController.swift */,
+				FA4865721974FFBF0049A45D /* Main.storyboard */,
+				FA4865751974FFBF0049A45D /* Images.xcassets */,
+				FA48656A1974FFBF0049A45D /* Supporting Files */,
+			);
+			path = LightSaber;
+			sourceTree = "<group>";
+		};
+		FA48656A1974FFBF0049A45D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA48656B1974FFBF0049A45D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA48657E1974FFBF0049A45D /* LightSaberTests */ = {
+			isa = PBXGroup;
+			children = (
+				FA4865811974FFBF0049A45D /* LightSaberTests.swift */,
+				FA48657F1974FFBF0049A45D /* Supporting Files */,
+			);
+			path = LightSaberTests;
+			sourceTree = "<group>";
+		};
+		FA48657F1974FFBF0049A45D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA4865801974FFBF0049A45D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FA4865661974FFBF0049A45D /* LightSaber */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA4865851974FFBF0049A45D /* Build configuration list for PBXNativeTarget "LightSaber" */;
+			buildPhases = (
+				FA4865631974FFBF0049A45D /* Sources */,
+				FA4865641974FFBF0049A45D /* Frameworks */,
+				FA4865651974FFBF0049A45D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LightSaber;
+			productName = LightSaber;
+			productReference = FA4865671974FFBF0049A45D /* LightSaber.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FA48657A1974FFBF0049A45D /* LightSaberTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA4865881974FFBF0049A45D /* Build configuration list for PBXNativeTarget "LightSaberTests" */;
+			buildPhases = (
+				FA4865771974FFBF0049A45D /* Sources */,
+				FA4865781974FFBF0049A45D /* Frameworks */,
+				FA4865791974FFBF0049A45D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA48657D1974FFBF0049A45D /* PBXTargetDependency */,
+			);
+			name = LightSaberTests;
+			productName = LightSaberTests;
+			productReference = FA48657B1974FFBF0049A45D /* LightSaberTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FA48655F1974FFBF0049A45D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Alex Wayne";
+				TargetAttributes = {
+					FA4865661974FFBF0049A45D = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					FA48657A1974FFBF0049A45D = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = FA4865661974FFBF0049A45D;
+					};
+				};
+			};
+			buildConfigurationList = FA4865621974FFBF0049A45D /* Build configuration list for PBXProject "LightSaber" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FA48655E1974FFBF0049A45D;
+			productRefGroup = FA4865681974FFBF0049A45D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FA4865661974FFBF0049A45D /* LightSaber */,
+				FA48657A1974FFBF0049A45D /* LightSaberTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FA4865651974FFBF0049A45D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA4865741974FFBF0049A45D /* Main.storyboard in Resources */,
+				FA4865761974FFBF0049A45D /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA4865791974FFBF0049A45D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FA4865631974FFBF0049A45D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA4865711974FFBF0049A45D /* DetailViewController.swift in Sources */,
+				FA48656F1974FFBF0049A45D /* MasterViewController.swift in Sources */,
+				FA48656D1974FFBF0049A45D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA4865771974FFBF0049A45D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA4865821974FFBF0049A45D /* LightSaberTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FA48657D1974FFBF0049A45D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA4865661974FFBF0049A45D /* LightSaber */;
+			targetProxy = FA48657C1974FFBF0049A45D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FA4865721974FFBF0049A45D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA4865731974FFBF0049A45D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FA4865831974FFBF0049A45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FA4865841974FFBF0049A45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FA4865861974FFBF0049A45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = LightSaber/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FA4865871974FFBF0049A45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = LightSaber/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		FA4865891974FFBF0049A45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LightSaber.app/LightSaber";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LightSaberTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		FA48658A1974FFBF0049A45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LightSaber.app/LightSaber";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LightSaberTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FA4865621974FFBF0049A45D /* Build configuration list for PBXProject "LightSaber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA4865831974FFBF0049A45D /* Debug */,
+				FA4865841974FFBF0049A45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA4865851974FFBF0049A45D /* Build configuration list for PBXNativeTarget "LightSaber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA4865861974FFBF0049A45D /* Debug */,
+				FA4865871974FFBF0049A45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FA4865881974FFBF0049A45D /* Build configuration list for PBXNativeTarget "LightSaberTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA4865891974FFBF0049A45D /* Debug */,
+				FA48658A1974FFBF0049A45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FA48655F1974FFBF0049A45D /* Project object */;
+}
