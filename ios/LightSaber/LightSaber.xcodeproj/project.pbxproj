@@ -13,6 +13,7 @@
 		FA4865741974FFBF0049A45D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4865721974FFBF0049A45D /* Main.storyboard */; };
 		FA4865761974FFBF0049A45D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA4865751974FFBF0049A45D /* Images.xcassets */; };
 		FA4865821974FFBF0049A45D /* LightSaberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4865811974FFBF0049A45D /* LightSaberTests.swift */; };
+		FA48658C197500D10049A45D /* LightProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48658B197500D10049A45D /* LightProgram.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		FA48657B1974FFBF0049A45D /* LightSaberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightSaberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4865801974FFBF0049A45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA4865811974FFBF0049A45D /* LightSaberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightSaberTests.swift; sourceTree = "<group>"; };
+		FA48658B197500D10049A45D /* LightProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightProgram.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				FA4865721974FFBF0049A45D /* Main.storyboard */,
 				FA4865751974FFBF0049A45D /* Images.xcassets */,
 				FA48656A1974FFBF0049A45D /* Supporting Files */,
+				FA48658B197500D10049A45D /* LightProgram.swift */,
 			);
 			path = LightSaber;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA4865711974FFBF0049A45D /* DetailViewController.swift in Sources */,
+				FA48658C197500D10049A45D /* LightProgram.swift in Sources */,
 				FA48656F1974FFBF0049A45D /* MasterViewController.swift in Sources */,
 				FA48656D1974FFBF0049A45D /* AppDelegate.swift in Sources */,
 			);

@@ -12,7 +12,7 @@ class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
     var objects = NSMutableArray()
-
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,14 +25,20 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-        self.navigationItem.rightBarButtonItem = addButton
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.detailViewController = controllers[controllers.endIndex-1].topViewController as? DetailViewController
-        }
+        
+        objects = NSMutableArray()
+        objects.insertObject(LightProgram(), atIndex: objects.count);
+        
+        
+        
+//        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
+//        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
+//        self.navigationItem.rightBarButtonItem = addButton
+//        if let split = self.splitViewController {
+//            let controllers = split.viewControllers
+//            self.detailViewController = controllers[controllers.endIndex-1].topViewController as? DetailViewController
+//        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,21 +46,21 @@ class MasterViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func insertNewObject(sender: AnyObject) {
-        if objects == nil {
-            objects = NSMutableArray()
-        }
-        objects.insertObject(NSDate.date(), atIndex: 0)
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-    }
+//    func insertNewObject(sender: AnyObject) {
+//        if objects == nil {
+//            objects = NSMutableArray()
+//        }
+//        objects.insertObject(NSDate.date(), atIndex: 0)
+//        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+//        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+//    }
 
     // #pragma mark - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             let indexPath = self.tableView.indexPathForSelectedRow()
-            let object = objects[indexPath.row] as NSDate
+            let object = objects[indexPath.row] as LightProgram
             ((segue.destinationViewController as UINavigationController).topViewController as DetailViewController).detailItem = object
         }
     }
@@ -72,8 +78,8 @@ class MasterViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
 
-        let object = objects[indexPath.row] as NSDate
-        cell.textLabel.text = object.description
+        let object = objects[indexPath.row] as LightProgram
+        cell.textLabel.text = object.name
         return cell
     }
 
