@@ -1,10 +1,8 @@
 #include "Program.h"
 
-void Program::setup(CRGB _leds[], Switch &_button, AccelSensor &_accel) {
+void Program::setup(CRGB _leds[], Switch &_button) {
   leds = _leds;
   button = &_button;
-  accel = &_accel;
-  useAccel = false;
 
   start();
 }

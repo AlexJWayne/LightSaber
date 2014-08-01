@@ -1,12 +1,12 @@
 #include <Wire.h>
 #include <FastLED.h>
-#include "AccelSensor.h"
 
 #include "Rotary.h"
 #include "Switch.h"
 
 #include "Program.h"
 
+#define LED_COUNT 48
 #define PROGRAM_COUNT 6
 
 #define HUECRAWL 0
@@ -26,12 +26,11 @@
 byte currentProgramIdx = 0;
 Program *currentProgram;
 
-CRGB leds[48];
+CRGB leds[LED_COUNT];
 
-Rotary rotary = Rotary(11, 12);
-Switch button = Switch(5);
-Adafruit_ADXL345_Unified accelSensorRaw = Adafruit_ADXL345_Unified(12345);
-AccelSensor accel = AccelSensor();
+Rotary rotary = Rotary(3, 4);
+Switch button = Switch(6);
+Switch modeButton = Switch(5);
 
 // Get programs ready
 HueCrawl hueCrawl = HueCrawl();
@@ -45,32 +44,31 @@ void setupLEDs();
 
 void setup() {
   Serial.begin(9600);
-  accel.start(accelSensorRaw);
 
   setupLEDs();
 
-  hueCrawl.setup(leds, button, accel);
-  sparkle.setup(leds, button, accel);
-  solidColor.setup(leds, button, accel);
-  flicker.setup(leds, button, accel);
-  bubble.setup(leds, button, accel);
-  gauge.setup(leds, button, accel);
+  hueCrawl.setup(leds, button);
+  sparkle.setup(leds, button);
+  solidColor.setup(leds, button);
+  flicker.setup(leds, button);
+  bubble.setup(leds, button);
+  gauge.setup(leds, button);
 
   setProgram();
 }
 
 void setupLEDs() {
-  FastLED.addLeds<LPD8806, 7, 8, GRB>(leds, 32);  
-  FastLED.setBrightness(30);
+  FastLED.addLeds<LPD8806, 7, 8, GRB>(leds, 48);
+  FastLED.setBrightness(20);
   FastLED.show();
 }
 
 void loop() {
   unsigned char rotaryResult = rotary.process();
   button.poll();
-  accel.update();
+  modeButton.poll();
 
-  if (rotaryResult == DIR_CW) {
+  if (modeButton.pushed()) {
     if (currentProgramIdx < PROGRAM_COUNT - 1) {
       currentProgramIdx++;
     } else {
@@ -78,13 +76,6 @@ void loop() {
     }
     setProgram();
 
-  } else if (rotaryResult == DIR_CCW) {
-    if (currentProgramIdx > 0) {
-      currentProgramIdx--;
-    } else {
-      currentProgramIdx = PROGRAM_COUNT - 1;
-    }
-    setProgram();
   }
 
   currentProgram->update();

@@ -18,11 +18,10 @@ void HueCrawl::update() {
 
   // 16 bits down to 8
   color.h = hueCounter >> 8;
-  
 
-  for (byte i = 0; i < 32; i++) {
+  for (byte i = 0; i < 48; i++) {
     CHSV c = color;
-    c.h -= i*4;
+    c.h -= i * 4;
     leds[i] = c;
   }
   
