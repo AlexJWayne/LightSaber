@@ -7,13 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA27FBFE1979934F002139D6 /* SolidColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA27FBFD1979934F002139D6 /* SolidColor.swift */; };
+		FA43EE2B198811AC009A31ED /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43EE2A198811AC009A31ED /* UIColor+Extensions.swift */; };
 		FA48656D1974FFBF0049A45D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48656C1974FFBF0049A45D /* AppDelegate.swift */; };
 		FA48656F1974FFBF0049A45D /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48656E1974FFBF0049A45D /* MasterViewController.swift */; };
 		FA4865711974FFBF0049A45D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4865701974FFBF0049A45D /* DetailViewController.swift */; };
 		FA4865741974FFBF0049A45D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4865721974FFBF0049A45D /* Main.storyboard */; };
 		FA4865761974FFBF0049A45D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA4865751974FFBF0049A45D /* Images.xcassets */; };
 		FA4865821974FFBF0049A45D /* LightSaberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4865811974FFBF0049A45D /* LightSaberTests.swift */; };
-		FA48658C197500D10049A45D /* LightProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48658B197500D10049A45D /* LightProgram.swift */; };
+		FA87AFCA1977AC4B00783651 /* LightProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87AFC81977AC4B00783651 /* LightProgram.swift */; };
+		FA87AFCB1977AC4B00783651 /* RainbowCrawl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87AFC91977AC4B00783651 /* RainbowCrawl.swift */; };
+		FA8B4B131981DF7F001001F3 /* BTLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8B4B121981DF7F001001F3 /* BTLE.swift */; };
+		FA8B4B171982275A001001F3 /* UARTPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B4B161982275A001001F3 /* UARTPeripheral.m */; };
+		FA8B4B1F198227B7001001F3 /* NSData+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B4B1B198227B7001001F3 /* NSData+hex.m */; };
+		FA8B4B20198227B7001001F3 /* NSString+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B4B1D198227B7001001F3 /* NSString+hex.m */; };
+		FA8B4B2F19823814001001F3 /* CBUUID+StringExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B4B2319823814001001F3 /* CBUUID+StringExtraction.m */; };
+		FA8B4B3019823814001001F3 /* LGCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B4B2619823814001001F3 /* LGCentralManager.m */; };
+		FA8B4B3119823814001001F3 /* LGCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B4B2819823814001001F3 /* LGCharacteristic.m */; };
+		FA8B4B3219823814001001F3 /* LGPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B4B2A19823814001001F3 /* LGPeripheral.m */; };
+		FA8B4B3319823814001001F3 /* LGService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B4B2C19823814001001F3 /* LGService.m */; };
+		FA8B4B3419823814001001F3 /* LGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8B4B2E19823814001001F3 /* LGUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA27FBFD1979934F002139D6 /* SolidColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidColor.swift; sourceTree = "<group>"; };
+		FA43EE2A198811AC009A31ED /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		FA43EF1C1989B7DE009A31ED /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		FA4865671974FFBF0049A45D /* LightSaber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightSaber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA48656B1974FFBF0049A45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA48656C1974FFBF0049A45D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,7 +53,29 @@
 		FA48657B1974FFBF0049A45D /* LightSaberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightSaberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4865801974FFBF0049A45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA4865811974FFBF0049A45D /* LightSaberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightSaberTests.swift; sourceTree = "<group>"; };
-		FA48658B197500D10049A45D /* LightProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightProgram.swift; sourceTree = "<group>"; };
+		FA87AFC81977AC4B00783651 /* LightProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightProgram.swift; sourceTree = "<group>"; };
+		FA87AFC91977AC4B00783651 /* RainbowCrawl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowCrawl.swift; sourceTree = "<group>"; };
+		FA8B4B121981DF7F001001F3 /* BTLE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTLE.swift; sourceTree = "<group>"; };
+		FA8B4B141982275A001001F3 /* LightSaber-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LightSaber-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA8B4B151982275A001001F3 /* UARTPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UARTPeripheral.h; sourceTree = "<group>"; };
+		FA8B4B161982275A001001F3 /* UARTPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UARTPeripheral.m; sourceTree = "<group>"; };
+		FA8B4B1A198227B7001001F3 /* NSData+hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+hex.h"; sourceTree = "<group>"; };
+		FA8B4B1B198227B7001001F3 /* NSData+hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+hex.m"; sourceTree = "<group>"; };
+		FA8B4B1C198227B7001001F3 /* NSString+hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+hex.h"; sourceTree = "<group>"; };
+		FA8B4B1D198227B7001001F3 /* NSString+hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+hex.m"; sourceTree = "<group>"; };
+		FA8B4B2219823814001001F3 /* CBUUID+StringExtraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBUUID+StringExtraction.h"; sourceTree = "<group>"; };
+		FA8B4B2319823814001001F3 /* CBUUID+StringExtraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBUUID+StringExtraction.m"; sourceTree = "<group>"; };
+		FA8B4B2419823814001001F3 /* LGBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGBluetooth.h; sourceTree = "<group>"; };
+		FA8B4B2519823814001001F3 /* LGCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGCentralManager.h; sourceTree = "<group>"; };
+		FA8B4B2619823814001001F3 /* LGCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGCentralManager.m; sourceTree = "<group>"; };
+		FA8B4B2719823814001001F3 /* LGCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGCharacteristic.h; sourceTree = "<group>"; };
+		FA8B4B2819823814001001F3 /* LGCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGCharacteristic.m; sourceTree = "<group>"; };
+		FA8B4B2919823814001001F3 /* LGPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPeripheral.h; sourceTree = "<group>"; };
+		FA8B4B2A19823814001001F3 /* LGPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGPeripheral.m; sourceTree = "<group>"; };
+		FA8B4B2B19823814001001F3 /* LGService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGService.h; sourceTree = "<group>"; };
+		FA8B4B2C19823814001001F3 /* LGService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGService.m; sourceTree = "<group>"; };
+		FA8B4B2D19823814001001F3 /* LGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGUtils.h; sourceTree = "<group>"; };
+		FA8B4B2E19823814001001F3 /* LGUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +117,24 @@
 		FA4865691974FFBF0049A45D /* LightSaber */ = {
 			isa = PBXGroup;
 			children = (
+				FA8B4B1A198227B7001001F3 /* NSData+hex.h */,
+				FA8B4B1B198227B7001001F3 /* NSData+hex.m */,
+				FA8B4B1C198227B7001001F3 /* NSString+hex.h */,
+				FA8B4B1D198227B7001001F3 /* NSString+hex.m */,
+				FA8B4B151982275A001001F3 /* UARTPeripheral.h */,
+				FA8B4B161982275A001001F3 /* UARTPeripheral.m */,
+				FA43EE2A198811AC009A31ED /* UIColor+Extensions.swift */,
+				FA8B4B2119823814001001F3 /* LGBluetooth */,
+				FA87AFC71977AC4B00783651 /* LightPrograms */,
 				FA48656C1974FFBF0049A45D /* AppDelegate.swift */,
 				FA48656E1974FFBF0049A45D /* MasterViewController.swift */,
 				FA4865701974FFBF0049A45D /* DetailViewController.swift */,
 				FA4865721974FFBF0049A45D /* Main.storyboard */,
+				FA8B4B121981DF7F001001F3 /* BTLE.swift */,
 				FA4865751974FFBF0049A45D /* Images.xcassets */,
 				FA48656A1974FFBF0049A45D /* Supporting Files */,
-				FA48658B197500D10049A45D /* LightProgram.swift */,
+				FA8B4B141982275A001001F3 /* LightSaber-Bridging-Header.h */,
+				FA43EF1C1989B7DE009A31ED /* MyPlayground.playground */,
 			);
 			path = LightSaber;
 			sourceTree = "<group>";
@@ -113,6 +162,36 @@
 				FA4865801974FFBF0049A45D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA87AFC71977AC4B00783651 /* LightPrograms */ = {
+			isa = PBXGroup;
+			children = (
+				FA87AFC81977AC4B00783651 /* LightProgram.swift */,
+				FA87AFC91977AC4B00783651 /* RainbowCrawl.swift */,
+				FA27FBFD1979934F002139D6 /* SolidColor.swift */,
+			);
+			path = LightPrograms;
+			sourceTree = "<group>";
+		};
+		FA8B4B2119823814001001F3 /* LGBluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				FA8B4B2219823814001001F3 /* CBUUID+StringExtraction.h */,
+				FA8B4B2319823814001001F3 /* CBUUID+StringExtraction.m */,
+				FA8B4B2419823814001001F3 /* LGBluetooth.h */,
+				FA8B4B2519823814001001F3 /* LGCentralManager.h */,
+				FA8B4B2619823814001001F3 /* LGCentralManager.m */,
+				FA8B4B2719823814001001F3 /* LGCharacteristic.h */,
+				FA8B4B2819823814001001F3 /* LGCharacteristic.m */,
+				FA8B4B2919823814001001F3 /* LGPeripheral.h */,
+				FA8B4B2A19823814001001F3 /* LGPeripheral.m */,
+				FA8B4B2B19823814001001F3 /* LGService.h */,
+				FA8B4B2C19823814001001F3 /* LGService.m */,
+				FA8B4B2D19823814001001F3 /* LGUtils.h */,
+				FA8B4B2E19823814001001F3 /* LGUtils.m */,
+			);
+			path = LGBluetooth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +243,7 @@
 				TargetAttributes = {
 					FA4865661974FFBF0049A45D = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = GHZHL2363Y;
 					};
 					FA48657A1974FFBF0049A45D = {
 						CreatedOnToolsVersion = 6.0;
@@ -214,10 +294,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA87AFCB1977AC4B00783651 /* RainbowCrawl.swift in Sources */,
 				FA4865711974FFBF0049A45D /* DetailViewController.swift in Sources */,
-				FA48658C197500D10049A45D /* LightProgram.swift in Sources */,
+				FA87AFCA1977AC4B00783651 /* LightProgram.swift in Sources */,
+				FA8B4B2F19823814001001F3 /* CBUUID+StringExtraction.m in Sources */,
+				FA8B4B20198227B7001001F3 /* NSString+hex.m in Sources */,
+				FA8B4B171982275A001001F3 /* UARTPeripheral.m in Sources */,
+				FA27FBFE1979934F002139D6 /* SolidColor.swift in Sources */,
 				FA48656F1974FFBF0049A45D /* MasterViewController.swift in Sources */,
+				FA8B4B3219823814001001F3 /* LGPeripheral.m in Sources */,
+				FA8B4B3319823814001001F3 /* LGService.m in Sources */,
+				FA8B4B3019823814001001F3 /* LGCentralManager.m in Sources */,
+				FA8B4B131981DF7F001001F3 /* BTLE.swift in Sources */,
+				FA8B4B1F198227B7001001F3 /* NSData+hex.m in Sources */,
+				FA8B4B3419823814001001F3 /* LGUtils.m in Sources */,
 				FA48656D1974FFBF0049A45D /* AppDelegate.swift in Sources */,
+				FA43EE2B198811AC009A31ED /* UIColor+Extensions.swift in Sources */,
+				FA8B4B3119823814001001F3 /* LGCharacteristic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,9 +428,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LightSaber/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LightSaber/LightSaber-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -346,9 +445,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LightSaber/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LightSaber/LightSaber-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -407,6 +511,7 @@
 				FA4865871974FFBF0049A45D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FA4865881974FFBF0049A45D /* Build configuration list for PBXNativeTarget "LightSaberTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +520,7 @@
 				FA48658A1974FFBF0049A45D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

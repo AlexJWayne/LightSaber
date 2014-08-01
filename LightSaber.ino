@@ -26,7 +26,7 @@
 byte currentProgramIdx = 0;
 Program *currentProgram;
 
-CRGB leds[32];
+CRGB leds[48];
 
 Rotary rotary = Rotary(11, 12);
 Switch button = Switch(5);
@@ -42,7 +42,6 @@ Bubble bubble = Bubble();
 Gauge gauge = Gauge();
 
 void setupLEDs();
-void setupAccel();
 
 void setup() {
   Serial.begin(9600);

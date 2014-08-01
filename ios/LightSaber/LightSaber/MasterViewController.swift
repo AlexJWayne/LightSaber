@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import CoreBluetooth
 
 class MasterViewController: UITableViewController {
-
+    
+    
+    // Instance Vars
     var detailViewController: DetailViewController? = nil
     var objects = NSMutableArray()
     
-
+    
+    // MARK: View Lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
@@ -24,38 +29,21 @@ class MasterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
         objects = NSMutableArray()
-        objects.insertObject(LightProgram(), atIndex: objects.count);
         
-        
-        
-//        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        
-//        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-//        self.navigationItem.rightBarButtonItem = addButton
-//        if let split = self.splitViewController {
-//            let controllers = split.viewControllers
-//            self.detailViewController = controllers[controllers.endIndex-1].topViewController as? DetailViewController
-//        }
+        // Add all out awesome programs!
+        objects.addObject(RainbowCrawl())
+        objects.addObject(SolidColor())
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-//    func insertNewObject(sender: AnyObject) {
-//        if objects == nil {
-//            objects = NSMutableArray()
-//        }
-//        objects.insertObject(NSDate.date(), atIndex: 0)
-//        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-//        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-//    }
-
-    // #pragma mark - Segues
+    
+    
+    
+    // MARK: Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
@@ -64,8 +52,10 @@ class MasterViewController: UITableViewController {
             ((segue.destinationViewController as UINavigationController).topViewController as DetailViewController).detailItem = object
         }
     }
+    
+    
 
-    // #pragma mark - Table View
+    // MARK: Table View
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -99,7 +89,7 @@ class MasterViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            let object = objects[indexPath.row] as NSDate
+            let object = objects[indexPath.row] as LightProgram
             self.detailViewController!.detailItem = object
         }
     }
