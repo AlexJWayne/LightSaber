@@ -1,6 +1,7 @@
 #include "HueCrawl.h"
 
 void HueCrawl::start() {
+  name = "Bob";
   color = CHSV(0, 0xFF, 0xFF);
   hueCounter = 0;
   upward = true;
@@ -8,11 +9,6 @@ void HueCrawl::start() {
 
 void HueCrawl::update() {
   const byte maxSpeed = 160;
-
-
-  if (button->pushed()) {
-    upward = !upward;
-  }
 
   hueCounter += mapDial(upward ? maxSpeed : -maxSpeed, 0);
 

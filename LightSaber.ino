@@ -1,10 +1,17 @@
 #include <Wire.h>
+#include <SPI.h>
+#include <Adafruit_BLE_UART.h>
 #include <FastLED.h>
 
 #include "Rotary.h"
 #include "Switch.h"
 
 #include "Program.h"
+
+// Eevery communication 
+typedef enum {
+  CommandSwitchMode = 0x01,
+} Command;
 
 #define LED_COUNT 48
 #define PROGRAM_COUNT 6
@@ -28,9 +35,14 @@ Program *currentProgram;
 
 CRGB leds[LED_COUNT];
 
-Rotary rotary = Rotary(3, 4);
-Switch button = Switch(6);
-Switch modeButton = Switch(5);
+
+// Bluetooth
+#define ADAFRUITBLE_REQ 10
+#define ADAFRUITBLE_RDY 2     // This should be an interrupt pin, on Uno thats #2 or #3
+#define ADAFRUITBLE_RST 9
+Adafruit_BLE_UART BTLEserial = Adafruit_BLE_UART(ADAFRUITBLE_REQ, ADAFRUITBLE_RDY, ADAFRUITBLE_RST);
+aci_evt_opcode_t BTLElastStatus = ACI_EVT_DISCONNECTED;
+
 
 // Get programs ready
 HueCrawl hueCrawl = HueCrawl();
@@ -44,15 +56,16 @@ void setupLEDs();
 
 void setup() {
   Serial.begin(9600);
+  BTLEserial.begin();
 
   setupLEDs();
 
-  hueCrawl.setup(leds, button);
-  sparkle.setup(leds, button);
-  solidColor.setup(leds, button);
-  flicker.setup(leds, button);
-  bubble.setup(leds, button);
-  gauge.setup(leds, button);
+  hueCrawl.setup(leds);
+  sparkle.setup(leds);
+  solidColor.setup(leds);
+  flicker.setup(leds);
+  bubble.setup(leds);
+  gauge.setup(leds);
 
   setProgram();
 }
@@ -64,21 +77,62 @@ void setupLEDs() {
 }
 
 void loop() {
-  unsigned char rotaryResult = rotary.process();
-  button.poll();
-  modeButton.poll();
-
-  if (modeButton.pushed()) {
-    if (currentProgramIdx < PROGRAM_COUNT - 1) {
-      currentProgramIdx++;
-    } else {
-      currentProgramIdx = 0;
-    }
-    setProgram();
-
-  }
-
+  pollBTLE();
+  switchModeOnSignal();
   currentProgram->update();
+}
+
+void switchModeOnSignal() {
+  if (BTLElastStatus == ACI_EVT_CONNECTED) {
+    if (BTLEserial.available()) {
+      byte cmd = BTLEserial.read();
+      switch (cmd) {
+        case CommandSwitchMode:
+          currentProgramIdx = BTLEserial.read();
+          setProgram();
+          Serial.print("Switching program: "); Serial.println(currentProgramIdx);
+          break;
+
+        default:
+          Serial.println("Unrecognized command!");
+      }
+    }
+  }
+}
+
+
+void pollBTLE() {
+  BTLEserial.pollACI();
+  aci_evt_opcode_t status = BTLEserial.getState();
+  
+  // If the status changed....
+  if (status != BTLElastStatus) {
+    // print it out!
+    if (status == ACI_EVT_DEVICE_STARTED) {
+      Serial.println(F("* Advertising started"));
+    }
+    if (status == ACI_EVT_CONNECTED) {
+      Serial.println(F("* Connected!"));
+      
+      delay(2000);
+      hueCrawl.sendDescriptor(&BTLEserial);
+
+
+      // for (uint8_t i = 0; i < hueCrawl.dataLen(); i++) {
+      //   Serial.print(F(" 0x")); Serial.print(hueCrawl.data()[i], HEX);
+      // }
+      // Serial.println();
+      // BTLEserial.write(hueCrawl.data(), hueCrawl.dataLen());
+
+      // BTLEserial.write(hueCrawl.data(), hueCrawl.dataLen());
+    }
+    if (status == ACI_EVT_DISCONNECTED) {
+      Serial.println(F("* Disconnected or advertising timed out"));
+
+    }
+    // OK set the last status change to this one
+    BTLElastStatus = status;
+  }
 }
 
 void setProgram() {

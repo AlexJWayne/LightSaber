@@ -2,10 +2,11 @@
 //  LightSaberTests.swift
 //  LightSaberTests
 //
-//  Created by Alex Wayne on 7/14/14.
+//  Created by Alex Wayne on 8/1/14.
 //  Copyright (c) 2014 Alex Wayne. All rights reserved.
 //
 
+import UIKit
 import XCTest
 
 class LightSaberTests: XCTestCase {

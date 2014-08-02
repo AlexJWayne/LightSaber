@@ -12,10 +12,10 @@ void Bubble::update() {
   const int maxPos16 = 0xFFFF;
   const int minPos16 = 0;
 
-  if (button->on() && millis() - button->pushedTime > 500) {
-    Serial.println(button->pushedTime);
-    hue16 += 64;
-  }
+  // if (button->on() && millis() - button->pushedTime > 500) {
+  //   Serial.println(button->pushedTime);
+  //   hue16 += 64;
+  // }
 
   CHSV color = CHSV(hue16 >> 8, 0xFF, 0xFF);
 
@@ -29,12 +29,12 @@ void Bubble::update() {
     pos8 = mapDial(0xFF + radius, -radius);
   }
 
-  if (button->released() && millis() - button->pushedTime < 500) {
-    isMoving = !isMoving;
-    if (isMoving) {
-      lastPos16 = pos8 << 8;
-    }
-  }
+  // if (button->released() && millis() - button->pushedTime < 500) {
+  //   isMoving = !isMoving;
+  //   if (isMoving) {
+  //     lastPos16 = pos8 << 8;
+  //   }
+  // }
 
   for (byte i = 0; i < 32; i++) {
     int brightness      = radius - abs(pos8 - i*8);

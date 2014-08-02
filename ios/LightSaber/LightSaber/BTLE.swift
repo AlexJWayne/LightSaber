@@ -2,107 +2,130 @@
 //  BTLE.swift
 //  LightSaber
 //
-//  Created by Alex Wayne on 7/24/14.
+//  Created by Alex Wayne on 8/1/14.
 //  Copyright (c) 2014 Alex Wayne. All rights reserved.
 //
 
 import Foundation
 import CoreBluetooth
 
-private let serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E"
-private let txUUID      = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"
-private let rxUUID      = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
+let serviceUUID  = CBUUID.UUIDWithString("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
+let writeUUID    = CBUUID.UUIDWithString("6E400002-B5A3-F393-E0A9-E50E24DCCA9E")
+let readUUID     = CBUUID.UUIDWithString("6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
+let infoUUID     = CBUUID.UUIDWithString("180A")
+let revisionUUID = CBUUID.UUIDWithString("2A27")
 
-class BTLE : NSObject, UARTPeripheralDelegate {
+class BTLE : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+    lazy var cm: CBCentralManager = CBCentralManager(delegate: self, queue: nil)
     
-    var currentPeripheral: LGPeripheral?
-    var currentService: LGService?
-    var sendCharacteristic: LGCharacteristic?
-    var receiveCharacteristic: LGCharacteristic?
+    var connected = false
+    var peripheral: CBPeripheral?
+    var service: CBService?
+    var readCharacteristic: CBCharacteristic?
+    var writeCharacteristic: CBCharacteristic?
     
-    func scan() {
-        NSLog("Scanning...")
-        
-        LGCentralManager.sharedInstance()
-            .scanForPeripheralsByInterval(4,
-                services: [UARTPeripheral.uartServiceUUID()],
-                options: nil,
-                completion: { (peripherals) in
-                    NSLog("Found %d peripherals", peripherals.count)
-                    if peripherals.count > 0 {
-                        self.connect(peripherals[0] as LGPeripheral)
-                    }
-                })
+    var onReceive: ((data: NSData)->())? = { (data: NSData) in
+        var foo = Program(data: data)
     }
     
-    func connect(peripheral: LGPeripheral) {
-        
-        // Open connection
-        peripheral.connectWithCompletion({ (error) in
-            if error { NSLog("Error: %@", error) }
+    func scan() {
+        if !peripheral {
+            NSLog("Scanning...")
+            cm.stopScan()
+            cm.scanForPeripheralsWithServices([serviceUUID], options: nil)
             
-            peripheral.discoverServicesWithCompletion({ (services, error) in
-                if error { NSLog("Error: %@", error) }
-                
-                for service in services as [LGService] {
-                    if service.UUIDString.uppercaseString == serviceUUID {
-                        self.currentService = service
-                        
-                        service.discoverCharacteristicsWithCompletion({ (characteristics, error) in
-                            for characteristic in characteristics as [LGCharacteristic] {
-                                if error { NSLog("Error: %@", error) }
-                                
-                                switch characteristic.UUIDString.uppercaseString {
-                                case rxUUID:
-                                    self.receiveCharacteristic = characteristic
-                                case txUUID:
-                                    self.sendCharacteristic = characteristic
-                                default:
-                                    NSLog("Unknown characteristic: %@", characteristic.UUIDString)
-                                }
-                            }
-                            
-                            // Save peripheral, we are connected
-                            self.currentPeripheral = peripheral
-                        })
-                    }
-                }
-            })
-        })
+            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("scan"), userInfo: nil, repeats: false)
+        }
     }
     
     func send(data: NSData) {
-        let maxBytes: Int = 20
+        NSLog("Sending %d bytes", data.length)
+        peripheral!.writeValue(data,
+            forCharacteristic: writeCharacteristic,
+            type: .WithoutResponse
+        )
+    }
+    
+    
+    // MARK: CBCentralManagerDelegate
+    
+    func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
+        NSLog("Dicovered peripheral")
+        self.peripheral = peripheral
+        cm.cancelPeripheralConnection(peripheral)
+        cm.connectPeripheral(peripheral, options: nil)
+    }
+    
+    func centralManagerDidUpdateState(central: CBCentralManager!) {
+        switch cm.state {
+        case .Unknown:
+            NSLog("Unknown")
+        case .Resetting:
+            NSLog("Resetting")
+        case .Unsupported:
+            NSLog("Unsupported")
+        case .Unauthorized:
+            NSLog("Unauthorized")
+        case .PoweredOn:
+            NSLog("PoweredOn")
+        case .PoweredOff:
+            NSLog("PoweredOff")
+        }
+    }
+    
+    func centralManager(central: CBCentralManager!, didConnectPeripheral peripheral: CBPeripheral!) {
+        NSLog("Connected!")
+        connected = true
         
-        if currentPeripheral && sendCharacteristic {
-            var byteIndex: Int = 0
-            NSLog("Sending %d bytes...", data.length)
+        peripheral.delegate = self
+        peripheral.discoverServices([serviceUUID])
+    }
+    
+    func centralManager(central: CBCentralManager!, didDisconnectPeripheral peripheral: CBPeripheral!, error: NSError!) {
+        NSLog("Disconnected")
+        connected = false
+        self.peripheral = nil
+        scan()
+    }
+    
+    func centralManager(central: CBCentralManager!, didFailToConnectPeripheral peripheral: CBPeripheral!, error: NSError!) {
+        NSLog("boo...")
+    }
+    
+    // MARK: CBPeripheralDelegate
+    
+    func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
+        service = peripheral.services[0] as? CBService
+        NSLog("Discovered service: %@", service!)
+        
+        peripheral.discoverCharacteristics([writeUUID, readUUID], forService: service)
+    }
+    
+    func peripheral(peripheral: CBPeripheral!, didDiscoverCharacteristicsForService service: CBService!, error: NSError!) {
+        NSLog("Discovered characteristics: %@", service!)
+        for characteristic: CBCharacteristic in service.characteristics as [CBCharacteristic] {
+            let uuid: String! = characteristic.UUID.UUIDString
             
-            while byteIndex < data.length {
-                var length: Int = maxBytes
-                if byteIndex + maxBytes > data.length {
-                    length = data.length - byteIndex
-                }
+            if uuid == readUUID.UUIDString {
+                NSLog("found read")
+                readCharacteristic = characteristic
+                peripheral.setNotifyValue(true, forCharacteristic: readCharacteristic)
                 
-                var packet = data.subdataWithRange(NSRange(location: byteIndex, length: length))
-                sendCharacteristic!.writeValue(packet, completion: nil)
-                byteIndex += maxBytes
+            } else if writeUUID.UUIDString {
+                NSLog("found write")
+                writeCharacteristic = characteristic
+                
+            } else {
+                NSLog("Unknown characteristic: %@", uuid)
+                
             }
         }
     }
     
-    
-    // MARK: UARTPeripheralDelegate
-    
-    func didReceiveData(newData: NSData!) {
-        NSLog("got data")
+    func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
+        NSLog("Received data: %@", readCharacteristic!.value)
+        onReceive?(data: readCharacteristic!.value)
     }
     
-    func didReadHardwareRevisionString(string: String!) {
-        NSLog("HW Revision: %@", string)
-    }
-    
-    func uartDidEncounterError(error: String!) {
-        NSLog("UART ERROR: %@", error)
-    }
+
 }

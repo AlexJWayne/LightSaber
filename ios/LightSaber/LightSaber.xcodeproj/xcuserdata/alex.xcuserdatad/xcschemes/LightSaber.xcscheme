@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FA4865661974FFBF0049A45D"
+               BlueprintIdentifier = "FA3C4F7D198CAB9D0087F4FF"
                BuildableName = "LightSaber.app"
                BlueprintName = "LightSaber"
                ReferencedContainer = "container:LightSaber.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FA48657A1974FFBF0049A45D"
+               BlueprintIdentifier = "FA3C4F91198CAB9D0087F4FF"
                BuildableName = "LightSaberTests.xctest"
                BlueprintName = "LightSaberTests"
                ReferencedContainer = "container:LightSaber.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FA4865661974FFBF0049A45D"
+            BlueprintIdentifier = "FA3C4F7D198CAB9D0087F4FF"
             BuildableName = "LightSaber.app"
             BlueprintName = "LightSaber"
             ReferencedContainer = "container:LightSaber.xcodeproj">
@@ -61,7 +61,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FA4865661974FFBF0049A45D"
+            BlueprintIdentifier = "FA3C4F7D198CAB9D0087F4FF"
             BuildableName = "LightSaber.app"
             BlueprintName = "LightSaber"
             ReferencedContainer = "container:LightSaber.xcodeproj">
@@ -79,7 +79,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FA4865661974FFBF0049A45D"
+            BlueprintIdentifier = "FA3C4F7D198CAB9D0087F4FF"
             BuildableName = "LightSaber.app"
             BlueprintName = "LightSaber"
             ReferencedContainer = "container:LightSaber.xcodeproj">
