@@ -20,8 +20,6 @@ class MasterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
         bt.onReceivedPrograms = { (programs) in
             self.objects = NSArray(array: programs)
@@ -59,21 +57,23 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-        
         if bt.connected {
+            let cell = tableView.dequeueReusableCellWithIdentifier("ProgramCell", forIndexPath: indexPath) as UITableViewCell
             let object = objects[indexPath.row] as Program
             cell.textLabel.text = object.name
+            return cell
+            
         } else {
-            cell.textLabel.text = "Waiting for Bluetooth..."
+            let cell = tableView.dequeueReusableCellWithIdentifier("WaitingCell", forIndexPath: indexPath) as UITableViewCell
+            var spinner = UIActivityIndicatorView(activityIndicatorStyle: .White)
+            spinner.startAnimating()
+            cell.accessoryView = spinner
+            return cell
         }
-
-        return cell
     }
-
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        performSegueWithIdentifier("showDetail", sender: self)
     }
 }
 

@@ -26,6 +26,9 @@ class Program : NSObject {
     var name: String = "Untitled"
     
     
+    var bt: BTLE {
+        return AppDelegate.instance().bt
+    }
     
     class func buildPrograms(data: NSData) -> [Program] {
         NSLog("Received complete data: %@", data);
