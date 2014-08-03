@@ -1,7 +1,7 @@
 #include "SolidColor.h"
 
 void SolidColor::start() {
-  
+  name = "SolidColor";
 }
 
 void SolidColor::update() {

@@ -1,6 +1,7 @@
 #include "Gauge.h"
 
 void Gauge::start() {
+  name = "Gauge";
   colorID = 0;
 };
 

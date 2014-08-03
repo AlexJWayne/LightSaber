@@ -1,7 +1,7 @@
 #include "Flicker.h"
 
 void Flicker::start() {
-  
+  name = "Flicker";
 };
 
 void Flicker::update() {

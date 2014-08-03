@@ -1,7 +1,7 @@
 #include "HueCrawl.h"
 
 void HueCrawl::start() {
-  name = "Bob";
+  name = "HueCrawl";
   color = CHSV(0, 0xFF, 0xFF);
   hueCounter = 0;
   upward = true;

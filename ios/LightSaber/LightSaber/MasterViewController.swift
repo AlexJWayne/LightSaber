@@ -9,8 +9,9 @@
 import UIKit
 
 class MasterViewController: UITableViewController {
-
-    var objects = NSMutableArray()
+    
+    var bt: BTLE = AppDelegate.instance().bt
+    var objects = NSArray()
 
 
     override func awakeFromNib() {
@@ -21,9 +22,11 @@ class MasterViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-        self.navigationItem.rightBarButtonItem = addButton
+        
+        bt.onReceivedPrograms = { (programs) in
+            self.objects = NSArray(array: programs)
+            self.tableView!.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,22 +34,13 @@ class MasterViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func insertNewObject(sender: AnyObject) {
-        if objects == nil {
-            objects = NSMutableArray()
-        }
-        objects.insertObject(NSDate.date(), atIndex: 0)
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-    }
-
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             let indexPath = self.tableView.indexPathForSelectedRow()
-            let object = objects[indexPath.row] as NSDate
-            (segue.destinationViewController as DetailViewController).detailItem = object
+            let object = objects[indexPath.row] as Program
+            (segue.destinationViewController as DetailViewController).program = object
         }
     }
 
@@ -57,14 +51,23 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        if bt.connected {
+            return objects.count
+        } else {
+            return 1
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        
+        if bt.connected {
+            let object = objects[indexPath.row] as Program
+            cell.textLabel.text = object.name
+        } else {
+            cell.textLabel.text = "Waiting for Bluetooth..."
+        }
 
-        let object = objects[indexPath.row] as NSDate
-        cell.textLabel.text = object.description
         return cell
     }
 
@@ -72,16 +75,5 @@ class MasterViewController: UITableViewController {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            objects.removeObjectAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
-
-
 }
 

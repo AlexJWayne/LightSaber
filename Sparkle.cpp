@@ -1,7 +1,7 @@
 #include "Sparkle.h"
 
 void Sparkle::start() {
-  
+  name = "Sparkle";
 };
 
 void Sparkle::update() {

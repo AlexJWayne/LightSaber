@@ -24,9 +24,11 @@ class BTLE : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var readCharacteristic: CBCharacteristic?
     var writeCharacteristic: CBCharacteristic?
     
-    var onReceive: ((data: NSData)->())? = { (data: NSData) in
-        var foo = Program(data: data)
-    }
+    var programs: [Program] = []
+    var buffer: NSMutableData? = nil
+    
+    var onReceivedPrograms: ((programs: [Program])->())?
+    var onDisconnect: (()->())?
     
     func scan() {
         if !peripheral {
@@ -85,6 +87,7 @@ class BTLE : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         NSLog("Disconnected")
         connected = false
         self.peripheral = nil
+        onDisconnect?()
         scan()
     }
     
@@ -123,9 +126,17 @@ class BTLE : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
-        NSLog("Received data: %@", readCharacteristic!.value)
-        onReceive?(data: readCharacteristic!.value)
-    }
-    
+        let data: NSData = readCharacteristic!.value
 
+        NSLog("Received data: %@", data)
+        if !buffer { buffer = NSMutableData() }
+        buffer!.appendData(data)
+        
+        let dataBytes = data.byteArray
+        if dataBytes.count == 1 && ProgramProperties.fromRaw(dataBytes[0]) == ProgramProperties.EndTransmission {
+            programs = Program.buildPrograms(buffer!)
+            onReceivedPrograms?(programs: programs)
+            buffer = nil
+        }
+    }
 }

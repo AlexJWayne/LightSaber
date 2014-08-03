@@ -8,14 +8,22 @@
 #define POT_PIN 3
 
 typedef enum {
-  InfoTypeName = 0x01
+  InfoTypeNewProgram      = 0x01,
+  InfoTypeEndTransmission = 0xFF,
+  InfoTypeID              = 0x02,
+  InfoTypeName            = 0x03
 } InfoType;
+
+static uint8_t nextId = 0;
 
 class Program {
   public:
     CRGB *leds;
+
+    uint8_t id;
     char *name;
 
+    Program();
     void setup(CRGB leds[]);
     virtual void start()  {};
     virtual void update() {};

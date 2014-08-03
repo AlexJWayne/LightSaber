@@ -13,10 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
     
+    class func instance() -> AppDelegate {
+        return UIApplication.sharedApplication().delegate as AppDelegate
+    }
+    
     lazy var bt: BTLE = BTLE()
 
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         bt.scan()
+        
         return true
     }
 

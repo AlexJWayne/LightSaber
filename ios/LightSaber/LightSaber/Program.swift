@@ -9,41 +9,102 @@
 import Foundation
 
 enum ProgramProperties: UInt8 {
-    case Name = 0x01
+    case NewProgram      = 0x01
+    case EndTransmission = 0xFF
+    case ID              = 0x02
+    case Name            = 0x03
+}
+
+enum ProgramCommand: UInt8 {
+    case SwitchMode = 0x01
 }
 
 
-class Program {
+class Program : NSObject {
+    
+    var id: UInt8 = 0xFF
     var name: String = "Untitled"
     
-    init(data: NSData) {
+    
+    
+    class func buildPrograms(data: NSData) -> [Program] {
+        NSLog("Received complete data: %@", data);
+        
+        var programs: [Program] = []
+        var programDataArrays: [[UInt8]] = []
+        let bytes: [UInt8] = data.byteArray
+        
         var cursor: Int = 0
-        var bytes = [UInt8](count:data.length, repeatedValue:0)
-        data.getBytes(&bytes, length:data.length)
+        
+        var foo: [UInt8] = [1,2,3,4]
+        var bar: Slice<UInt8> = foo[1...2]
+        
         
         while cursor < bytes.count {
-            switch bytes[cursor] {
-            case ProgramProperties.Name.toRaw():
-                name = ""
-                
-                cursor++
-                var len: Int = Int(bytes[cursor])
-                
-                cursor++
-                var nameBytes = [UInt8](count:data.length, repeatedValue:0)
-                data.getBytes(&nameBytes, range: NSRange(location: cursor, length: len))
-                
-                cursor += len
-                for byte in nameBytes {
-                    self.name += NSString(bytes: [byte] as [UInt8], length: 1, encoding: NSASCIIStringEncoding)
+            if let prop = ProgramProperties.fromRaw(bytes[cursor]) {
+                switch prop  {
+                case .NewProgram:
+                    let len = Int(bytes[cursor + 1])
+                    let programBytes = [UInt8](
+                        bytes[cursor..<cursor+len]
+                    )
+
+                    programDataArrays += programBytes
+                    cursor += len
                     
+                case .EndTransmission:
+                    NSLog("Creating programs!")
+                    for pBytes in programDataArrays {
+                        programs += Program(bytes: pBytes)
+                    }
+                    return programs
+                    
+                default:
+                    NSLog("This shouldn't happen!")
+                    break
                 }
-                
-            default:
-                NSLog("Unknown property ID: %d", bytes[cursor])
+            } else {
+                NSLog("This shouldn't happen: %x", bytes[cursor])
+                break
             }
         }
         
-        NSLog("Name: %@", name)
+        return programs
+    }
+    
+    init(bytes: [UInt8]) {
+        // Start at descriptor of first property
+        var cursor: Int = 2
+        
+        while cursor < bytes.count {
+            if let prop = ProgramProperties.fromRaw(bytes[cursor]) {
+                switch prop {
+                case .ID:
+                    id = bytes[cursor+1]
+                    cursor += 2
+                    
+                case .Name:
+                    name = ""
+                    
+                    var len: Int = Int(bytes[cursor+1])
+                    var nameBytes = [UInt8]( bytes[cursor+2..<cursor+2+len] )
+                    self.name = NSString(bytes: nameBytes, length: len, encoding: NSASCIIStringEncoding)
+                    cursor += 2 + len
+                    
+                default:
+                    NSLog("Unknown property ID: %d", bytes[cursor])
+                }
+            } else {
+                NSLog("This shouldn't happen!")
+                break
+            }
+        }
+        
+        NSLog("Name: %@, id: %d", name, id)
+    }
+    
+    func sendActivation() {
+        var cmd: [UInt8] = [ProgramCommand.SwitchMode.toRaw(), id]
+        AppDelegate.instance().bt.send(NSData(bytes: cmd, length: 2))
     }
 }

@@ -11,10 +11,14 @@ import UIKit
 class DetailViewController: UIViewController {
                             
     @IBOutlet weak var detailDescriptionLabel: UILabel!
+    var bt: BTLE {
+        return AppDelegate.instance().bt
+    }
 
-
-    var detailItem: AnyObject? {
+    var program: Program? {
         didSet {
+            program?.sendActivation()
+            
             // Update the view.
             self.configureView()
         }
@@ -22,9 +26,9 @@ class DetailViewController: UIViewController {
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail: AnyObject = self.detailItem {
+        if let detail: Program = program {
             if let label = self.detailDescriptionLabel {
-                label.text = detail.description
+                label.text = detail.name
             }
         }
     }

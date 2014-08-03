@@ -1,6 +1,7 @@
 #include "Bubble.h"
 
 void Bubble::start() {
+  name = "Bubble";
   isMoving = false;
   hue16 = 0;
 };
