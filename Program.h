@@ -11,7 +11,8 @@ typedef enum {
   InfoTypeNewProgram      = 0x01,
   InfoTypeEndTransmission = 0xFF,
   InfoTypeID              = 0x02,
-  InfoTypeName            = 0x03
+  InfoTypeName            = 0x03,
+  InfoTypeVarRange        = 0x04
 } InfoType;
 
 static uint8_t nextId = 0;
@@ -22,6 +23,8 @@ class Program {
 
     uint8_t id;
     char *name;
+    uint8_t numChannels;
+    uint8_t channelTypes[4];
 
     Program();
     void setup(CRGB leds[]);
@@ -30,6 +33,7 @@ class Program {
 
     void sendDescriptor(Adafruit_BLE_UART *bt);
     uint8_t dataLen();
+    virtual void writeChannel(uint8_t channelID, uint8_t value) {};
     int mapDial(int min, int max);
 };
 

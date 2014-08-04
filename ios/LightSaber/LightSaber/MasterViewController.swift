@@ -25,6 +25,11 @@ class MasterViewController: UITableViewController {
             self.objects = NSArray(array: programs)
             self.tableView!.reloadData()
         }
+        
+        bt.onDisconnect = {
+            self.navigationController!.popToRootViewControllerAnimated(true)
+            self.tableView!.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,8 +77,8 @@ class MasterViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        performSegueWithIdentifier("showDetail", sender: self)
-    }
+//    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+//        performSegueWithIdentifier("showDetail", sender: self)
+//    }
 }
 

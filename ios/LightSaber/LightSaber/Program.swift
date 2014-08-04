@@ -13,10 +13,12 @@ enum ProgramProperties: UInt8 {
     case EndTransmission = 0xFF
     case ID              = 0x02
     case Name            = 0x03
+    case VarRange        = 0x04
 }
 
 enum ProgramCommand: UInt8 {
     case SwitchMode = 0x01
+    case WriteVar   = 0x02
 }
 
 
@@ -24,6 +26,8 @@ class Program : NSObject {
     
     var id: UInt8 = 0xFF
     var name: String = "Untitled"
+    var channels: [ProgramProperties] = []
+    var channelValues: [UInt8] = []
     
     
     var bt: BTLE {
@@ -90,9 +94,14 @@ class Program : NSObject {
                     name = ""
                     
                     var len: Int = Int(bytes[cursor+1])
-                    var nameBytes = [UInt8]( bytes[cursor+2..<cursor+2+len] )
+                    var nameBytes = [UInt8]( bytes[(cursor + 2)..<(cursor + 2 + len)] )
                     self.name = NSString(bytes: nameBytes, length: len, encoding: NSASCIIStringEncoding)
                     cursor += 2 + len
+                
+                case .VarRange:
+                    channels.append(ProgramProperties.VarRange)
+                    channelValues.append(0)
+                    cursor += 1
                     
                 default:
                     NSLog("Unknown property ID: %d", bytes[cursor])
@@ -103,11 +112,16 @@ class Program : NSObject {
             }
         }
         
-        NSLog("Name: %@, id: %d", name, id)
+        NSLog("Name: %@, id: %d, channels: %d", name, id, channels.count)
     }
     
     func sendActivation() {
         var cmd: [UInt8] = [ProgramCommand.SwitchMode.toRaw(), id]
-        AppDelegate.instance().bt.send(NSData(bytes: cmd, length: 2))
+        bt.send(NSData(bytes: cmd, length: 2))
+    }
+    
+    func updateChannel(channelID: UInt8, value: UInt8) {
+        var cmd: [UInt8] = [ProgramCommand.WriteVar.toRaw(), channelID, value]
+        bt.send(NSData(bytes: cmd, length: 3))
     }
 }

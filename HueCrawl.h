@@ -7,10 +7,12 @@ class HueCrawl : public Program {
   public:
     CHSV color;
     int hueCounter;
-    bool upward;
+    int speed;
+    uint8_t spread;
 
     void start();
     void update();
+    void writeChannel(uint8_t channelID, uint8_t value);
 };
 
 #endif

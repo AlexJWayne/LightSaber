@@ -11,6 +11,7 @@
 // Eevery communication 
 typedef enum {
   CommandSwitchMode = 0x01,
+  CommandWriteVar   = 0x02
 } Command;
 
 #define LED_COUNT 48
@@ -66,17 +67,21 @@ void setupLEDs() {
 
 void loop() {
   pollBTLE();
-  switchModeOnSignal();
+  handleSignal();
   currentProgram->update();
 }
 
-void switchModeOnSignal() {
+void handleSignal() {
   if (BTLElastStatus == ACI_EVT_CONNECTED) {
     if (BTLEserial.available()) {
       byte cmd = BTLEserial.read();
       switch (cmd) {
         case CommandSwitchMode:
           currentProgram = programs[BTLEserial.read()];
+          break;
+
+        case CommandWriteVar:
+          currentProgram->writeChannel(BTLEserial.read(), BTLEserial.read());
           break;
 
         default:

@@ -2,6 +2,11 @@
 
 Program::Program() {
   id = nextId++;
+  numChannels = 0;
+
+  for (uint8_t i = 0; i < 4; i++) {
+    channelTypes[i] = 0;
+  }
 }
 
 void Program::setup(CRGB _leds[]) {
@@ -36,9 +41,16 @@ void Program::sendDescriptor(Adafruit_BLE_UART *bt) {
   }
   cursor += 2 + nameLength;
 
+  // Channels
+  for (uint8_t i = 0; i < numChannels; i++) {
+    buf[cursor + 0] = channelTypes[i];
+    cursor += 1;
+  }
+
+  // Send the descriptor.
   bt->write(buf, dataLen());
 }
 
 uint8_t Program::dataLen() {
-  return strlen(name) + 6;
+  return 2 + 2 + 2 + strlen(name) + numChannels;
 }
