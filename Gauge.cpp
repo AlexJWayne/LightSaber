@@ -2,29 +2,20 @@
 
 void Gauge::start() {
   name = "Gauge";
-  colorID = 0;
+  numChannels = 3;
+  channelTypes[0] = InfoTypeVarRange;
+  channelTypes[1] = InfoTypeVarRange;
+  channelTypes[2] = InfoTypeVarRange;
+
+  pos = LED_COUNT / 2;
 };
 
 void Gauge::update() {
-  const byte radius = 64;
-
-  byte pos = mapDial(48, 0);
-
-  for (byte i = 0; i < 48; i++) {
+  uint8_t hue = 0;
+  for (uint8_t i = 0; i < LED_COUNT; i++) {
     if (i < pos) {
-      if (i < 24) {
-        leds[i] = CRGB(
-          map(i, 0, 23, 0, 0xFF),
-          0xFF,
-          0
-        );
-      } else {
-        leds[i] = CRGB(
-          0xFF,
-          map(i, 24, 47, 0xFF, 0),
-          0
-        );
-      }
+      hue = map(i, 0, LED_COUNT-1, hueStart, hueEnd);
+      leds[i] = CHSV(hue, 0xFF, 0xFF);
     } else {
       leds[i] = CRGB::Black;
     }
@@ -32,3 +23,21 @@ void Gauge::update() {
 
   FastLED.show();
 };
+
+void Gauge::writeChannel(uint8_t channelID, uint8_t value) {
+  const byte maxThreshold = 48;
+
+  switch(channelID) {
+  case 0:
+    pos = map(value, 0, 255, 0, maxThreshold);
+    break;
+
+  case 1:
+    hueStart = value;
+    break;
+
+  case 2:
+    hueEnd = value;
+    break;
+  }
+}

@@ -5,6 +5,7 @@
 #include <Adafruit_BLE_UART.h>
 #include "Switch.h"
 
+#define LED_COUNT 48
 #define POT_PIN 3
 
 typedef enum {
@@ -24,7 +25,7 @@ class Program {
     uint8_t id;
     char *name;
     uint8_t numChannels;
-    uint8_t channelTypes[4];
+    uint8_t channelTypes[6];
 
     Program();
     void setup(CRGB leds[]);

@@ -8,7 +8,7 @@
 
 #include "Program.h"
 
-// Eevery communication 
+// Eevery communication
 typedef enum {
   CommandSwitchMode = 0x01,
   CommandWriteVar   = 0x02
@@ -32,7 +32,7 @@ CRGB leds[LED_COUNT];
 
 // Bluetooth
 #define ADAFRUITBLE_REQ 10
-#define ADAFRUITBLE_RDY 2     // This should be an interrupt pin, on Uno thats #2 or #3
+#define ADAFRUITBLE_RDY 1     // This should be an interrupt pin, on Uno thats #2 or #3
 #define ADAFRUITBLE_RST 9
 Adafruit_BLE_UART BTLEserial = Adafruit_BLE_UART(ADAFRUITBLE_REQ, ADAFRUITBLE_RDY, ADAFRUITBLE_RST);
 aci_evt_opcode_t BTLElastStatus = ACI_EVT_DISCONNECTED;
@@ -85,7 +85,7 @@ void handleSignal() {
           break;
 
         default:
-          Serial.println("Unrecognized command!");
+          Serial.println(F("Unrecognized command!"));
       }
     }
   }
@@ -101,7 +101,7 @@ void sendProgramData() {
 void pollBTLE() {
   BTLEserial.pollACI();
   aci_evt_opcode_t status = BTLEserial.getState();
-  
+
   // If the status changed....
   if (status != BTLElastStatus) {
     // print it out!
@@ -110,10 +110,10 @@ void pollBTLE() {
     }
     if (status == ACI_EVT_CONNECTED) {
       Serial.println(F("* Connected!"));
-      
-      delay(2000);
+
+      delay(1000);
       sendProgramData();
-      
+
     }
     if (status == ACI_EVT_DISCONNECTED) {
       Serial.println(F("* Disconnected or advertising timed out"));

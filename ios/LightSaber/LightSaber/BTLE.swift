@@ -31,7 +31,7 @@ class BTLE : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var onDisconnect: (()->())?
     
     func scan() {
-        if !peripheral {
+        if peripheral != nil {
             NSLog("Scanning...")
             cm.stopScan()
             cm.scanForPeripheralsWithServices([serviceUUID], options: nil)
@@ -129,7 +129,7 @@ class BTLE : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         let data: NSData = readCharacteristic!.value
 
         NSLog("Received data: %@", data)
-        if !buffer { buffer = NSMutableData() }
+        if buffer != nil { buffer = NSMutableData() }
         buffer!.appendData(data)
         
         let dataBytes = data.byteArray

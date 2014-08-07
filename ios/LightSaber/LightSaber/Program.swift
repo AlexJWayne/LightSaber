@@ -56,13 +56,13 @@ class Program : NSObject {
                         bytes[cursor..<cursor+len]
                     )
 
-                    programDataArrays += programBytes
+                    programDataArrays.append(programBytes)
                     cursor += len
                     
                 case .EndTransmission:
                     NSLog("Creating programs!")
                     for pBytes in programDataArrays {
-                        programs += Program(bytes: pBytes)
+                        programs.append(Program(bytes: pBytes))
                     }
                     return programs
                     

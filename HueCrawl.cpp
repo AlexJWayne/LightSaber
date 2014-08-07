@@ -9,7 +9,7 @@ void HueCrawl::start() {
   color = CHSV(0, 0xFF, 0xFF);
   hueCounter = 0;
   speed = 80;
-  spread = 64;
+  spread = 16;
 };
 
 void HueCrawl::update() {
@@ -23,7 +23,7 @@ void HueCrawl::update() {
     c.h -= ((i << 8) * spread) >> 8;
     leds[i] = c;
   }
-  
+
   FastLED.show();
 };
 
