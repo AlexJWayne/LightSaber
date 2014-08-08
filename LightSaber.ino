@@ -61,7 +61,7 @@ void setup() {
 
 void setupLEDs() {
   FastLED.addLeds<LPD8806, 7, 8, GRB>(leds, 48);
-  FastLED.setBrightness(20);
+  FastLED.setBrightness(60);
   FastLED.show();
 }
 
