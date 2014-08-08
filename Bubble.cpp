@@ -12,8 +12,8 @@ void Bubble::start() {
 
 void Bubble::update() {
   const byte speed = 192;
-  const byte radius = 64;
-  const byte innerRadius = 48;
+  const byte radius = 48;
+  const byte innerRadius = 40;
 
   // int pos8;
   //
