@@ -3,7 +3,6 @@
 #include <Adafruit_BLE_UART.h>
 #include <FastLED.h>
 
-#include "Rotary.h"
 #include "Switch.h"
 
 #include "Program.h"

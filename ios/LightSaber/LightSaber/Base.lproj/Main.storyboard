@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rS3-R9-Ivy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
+        <capability name="Constraints with attributes relative to the layout margin" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Master-->
@@ -93,13 +94,13 @@
                         <color key="backgroundColor" white="0.10000000000000001" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RangeCell" id="XJd-4y-J95">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RangeCell" id="XJd-4y-J95" customClass="ChannelCell" customModule="LightSaber" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XJd-4y-J95" id="KUz-Ci-ulR">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <slider opaque="NO" tag="-1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="wC3-ei-YIz">
-                                            <rect key="frame" x="18" y="36" width="564" height="31"/>
+                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="wC3-ei-YIz">
+                                            <rect key="frame" x="38" y="35" width="504" height="31"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="560" id="slJ-ja-EGI"/>
                                             </constraints>
@@ -118,23 +119,31 @@
                                                 <action selector="didUpdateSlider:" destination="zu0-zr-tqz" eventType="valueChanged" id="MSc-10-Xp7"/>
                                             </connections>
                                         </slider>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i59-in-osl">
-                                            <rect key="frame" x="20" y="21" width="560" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i59-in-osl">
+                                            <rect key="frame" x="40" y="21" width="500" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="F19-gc-LDX">
+                                            <rect key="frame" x="543" y="35" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="didToggleSwitch:" destination="zu0-zr-tqz" eventType="valueChanged" id="XrW-L2-QTb"/>
+                                            </connections>
+                                        </switch>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="wC3-ei-YIz" firstAttribute="top" secondItem="KUz-Ci-ulR" secondAttribute="top" constant="35" id="EDQ-5w-E9h"/>
+                                        <constraint firstItem="F19-gc-LDX" firstAttribute="top" secondItem="wC3-ei-YIz" secondAttribute="top" id="FWg-zL-Pkd"/>
                                         <constraint firstItem="i59-in-osl" firstAttribute="trailing" secondItem="wC3-ei-YIz" secondAttribute="trailing" id="GLH-1j-fkL"/>
-                                        <constraint firstAttribute="trailing" secondItem="wC3-ei-YIz" secondAttribute="trailing" constant="20" id="HcN-Er-mEF"/>
+                                        <constraint firstAttribute="trailing" secondItem="wC3-ei-YIz" secondAttribute="trailing" constant="60" id="HcN-Er-mEF"/>
                                         <constraint firstItem="i59-in-osl" firstAttribute="top" secondItem="KUz-Ci-ulR" secondAttribute="top" constant="21" id="NL1-Lt-423"/>
                                         <constraint firstItem="i59-in-osl" firstAttribute="leading" secondItem="wC3-ei-YIz" secondAttribute="leading" id="RrA-J2-T8y"/>
                                         <constraint firstItem="wC3-ei-YIz" firstAttribute="top" secondItem="KUz-Ci-ulR" secondAttribute="top" constant="35" id="Uj7-Gu-wNT"/>
                                         <constraint firstItem="wC3-ei-YIz" firstAttribute="leading" secondItem="KUz-Ci-ulR" secondAttribute="leading" constant="20" symbolic="YES" id="Yig-dW-MaK"/>
                                         <constraint firstItem="wC3-ei-YIz" firstAttribute="top" secondItem="KUz-Ci-ulR" secondAttribute="top" constant="35" id="e6Q-WY-fzW"/>
-                                        <constraint firstItem="wC3-ei-YIz" firstAttribute="leading" secondItem="KUz-Ci-ulR" secondAttribute="leading" constant="20" id="xBq-Br-XRP"/>
+                                        <constraint firstItem="F19-gc-LDX" firstAttribute="trailing" secondItem="KUz-Ci-ulR" secondAttribute="trailingMargin" id="jT6-df-Wv2"/>
+                                        <constraint firstItem="wC3-ei-YIz" firstAttribute="leading" secondItem="KUz-Ci-ulR" secondAttribute="leading" constant="40" id="xBq-Br-XRP"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -158,6 +167,11 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="label" destination="i59-in-osl" id="wM6-9s-e0A"/>
+                                    <outlet property="slider" destination="wC3-ei-YIz" id="zP0-Bv-NuC"/>
+                                    <outlet property="toggle" destination="F19-gc-LDX" id="tj4-eG-YNJ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

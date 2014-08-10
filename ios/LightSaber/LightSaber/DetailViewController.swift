@@ -8,22 +8,70 @@
 
 import UIKit
 
-class DetailViewController: UITableViewController {
-                            
-//    @IBOutlet weak var detailDescriptionLabel: UILabel!
+struct ChannelAnimation {
+    var channel: Int? = 0
+    var lastMs: Double = 0
+    var elapsedMs: Double = 0
+    
+    init() {
+        lastMs = NSDate().timeIntervalSince1970
+    }
+    
+    mutating func updateElapsed() {
+        var now = NSDate().timeIntervalSince1970
+        elapsedMs += now - lastMs
+        lastMs = now
+    }
+}
 
-    var program: Program? {
+class DetailViewController: UITableViewController {
+    
+    var program: Program! {
         didSet {
             program?.sendActivation()
-            
-            // Update the view.
             self.configureView()
         }
     }
     
+    var animation: ChannelAnimation = ChannelAnimation()
+    
     @IBAction func didUpdateSlider(sender: UIControl) {
         let slider = sender as UISlider
-        program!.updateChannel(UInt8(slider.tag), value: UInt8(Int(slider.value * 255.0)))
+        program.updateChannel(UInt8(slider.tag), value: UInt8(Int(slider.value * 255.0)))
+    }
+    
+    @IBAction func didToggleSwitch(sender: UIControl) {
+        let toggle = sender as UISwitch
+        
+        for cell in tableView.visibleCells() {
+            if (cell as ChannelCell).toggle != toggle {
+                (cell as ChannelCell).toggle.setOn(false, animated: true)
+            }
+        }
+        
+        if toggle.on {
+            animation.channel = toggle.tag
+            animateChannel()
+            NSLog("Channel %d on", animation.channel!)
+        } else {
+            NSLog("Stopping channel animation")
+            animation.channel = nil
+        }
+    }
+    
+    func animateChannel() {
+        if let channel = animation.channel {
+            animation.updateElapsed()
+            
+            var val: Double = sin(animation.elapsedMs) / 2 + 0.5
+            var val8: UInt8 = UInt8(UInt(val * 255))
+            program.updateChannel(UInt8(channel), value: val8)
+            
+            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: channel, inSection: 0)) as ChannelCell
+            cell.slider.value = Float(val)
+            
+            NSTimer.scheduledTimerWithTimeInterval(1/40, target: self, selector: Selector("animateChannel"), userInfo: nil, repeats: false)
+        }
     }
     
     
@@ -37,6 +85,10 @@ class DetailViewController: UITableViewController {
         if let detail: Program = program {
             navigationItem!.title = program!.name
         }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        animation.channel = nil
     }
 
     override func viewDidLoad() {
@@ -68,15 +120,8 @@ class DetailViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RangeCell", forIndexPath: indexPath) as UITableViewCell
-        if let slider = cell.viewWithTag(-1) {
-            slider.tag = indexPath!.row
-        }
-        
-        if let label = cell.viewWithTag(10) as? UILabel {
-            label.text = String(indexPath.row + 1)
-        }
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("RangeCell", forIndexPath: indexPath) as ChannelCell
+        cell.channelID = UInt8(indexPath!.row)
         return cell
     }
 }
