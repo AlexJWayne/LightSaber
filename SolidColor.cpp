@@ -6,8 +6,14 @@ void SolidColor::start() {
   color = CHSV(0, 0xFF, 0xFF);
 
   numChannels = 2;
-  channelTypes[0] = InfoTypeVarRange;
-  channelTypes[1] = InfoTypeVarRange;
+
+  channels[0].name = "Hue";
+  channels[0].type = ProgPropVarRange;
+  channels[0].value = 0; // 0-255 mapped from min to max
+
+  channels[1].name = "Saturation";
+  channels[1].type = ProgPropVarRange;
+  channels[1].value = 255; // 0-255 mapped from min to max
 }
 
 void SolidColor::update() {

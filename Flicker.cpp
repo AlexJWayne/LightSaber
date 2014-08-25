@@ -3,7 +3,10 @@
 void Flicker::start() {
   name = "Flicker";
   numChannels = 1;
-  channelTypes[0] = InfoTypeVarRange;
+
+  channels[0].name = "Intensity";
+  channels[0].type = ProgPropVarRange;
+  channels[0].value = 32; // 0-255 mapped from min to max
 
   threshold = 500;
 };

@@ -120,8 +120,12 @@ class DetailViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        let channel: Channel = program.channels[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("RangeCell", forIndexPath: indexPath) as ChannelCell
-        cell.channelID = UInt8(indexPath!.row)
+        
+        cell.channelID    = channel.id
+        cell.slider.value = channel.value
+        cell.label.text   = channel.name
         return cell
     }
 }

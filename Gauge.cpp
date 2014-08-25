@@ -3,11 +3,22 @@
 void Gauge::start() {
   name = "Gauge";
   numChannels = 3;
-  channelTypes[0] = InfoTypeVarRange;
-  channelTypes[1] = InfoTypeVarRange;
-  channelTypes[2] = InfoTypeVarRange;
+
+  channels[0].name = "Level";
+  channels[0].type = ProgPropVarRange;
+  channels[0].value = 127; // 0-255 mapped from min to max
+
+  channels[1].name = "Bottom Hue";
+  channels[1].type = ProgPropVarRange;
+  channels[1].value = 0; // 0-255 mapped from min to max
+
+  channels[2].name = "Top Hue";
+  channels[2].type = ProgPropVarRange;
+  channels[2].value = 0xFF; // 0-255 mapped from min to max
 
   pos = LED_COUNT / 2;
+  hueStart = 0;
+  hueEnd = 0xFF;
 };
 
 void Gauge::update() {

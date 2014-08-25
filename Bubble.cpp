@@ -3,8 +3,14 @@
 void Bubble::start() {
   name = "Bubble";
   numChannels = 2;
-  channelTypes[0] = InfoTypeVarRange;
-  channelTypes[1] = InfoTypeVarRange;
+
+  channels[0].name = "Position";
+  channels[0].type = ProgPropVarRange;
+  channels[0].value = 127; // 0-255 mapped from min to max
+
+  channels[1].name = "Hue";
+  channels[1].type = ProgPropVarRange;
+  channels[1].value = 64; // 0-255 mapped from min to max
 
   isMoving = false;
   hue = 0x80;

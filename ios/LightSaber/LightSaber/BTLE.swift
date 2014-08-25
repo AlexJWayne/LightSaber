@@ -17,6 +17,8 @@ let revisionUUID = CBUUID.UUIDWithString("2A27")
 
 class BTLE : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     lazy var cm: CBCentralManager = CBCentralManager(delegate: self, queue: nil)
+    let endTransmissionPacket: [UInt8] = [UInt8](count: 1, repeatedValue: ProgramProperties.EndTransmission.toRaw())
+    var lastDataReceivedAt: NSDate?
     
     var connected = false
     var peripheral: CBPeripheral?
@@ -35,8 +37,7 @@ class BTLE : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             NSLog("Scanning...")
             cm.stopScan()
             cm.scanForPeripheralsWithServices([serviceUUID], options: nil)
-            
-            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("scan"), userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: Selector("scan"), userInfo: nil, repeats: false)
         }
     }
     
@@ -85,10 +86,7 @@ class BTLE : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func centralManager(central: CBCentralManager!, didDisconnectPeripheral peripheral: CBPeripheral!, error: NSError!) {
         NSLog("Disconnected")
-        connected = false
-        self.peripheral = nil
-        onDisconnect?()
-        scan()
+        disconnect()
     }
     
     func centralManager(central: CBCentralManager!, didFailToConnectPeripheral peripheral: CBPeripheral!, error: NSError!) {
@@ -127,16 +125,37 @@ class BTLE : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
         let data: NSData = readCharacteristic!.value
-
+        lastDataReceivedAt = NSDate.date()
+        
         NSLog("Received data: %@", data)
         if buffer == nil { buffer = NSMutableData() }
         buffer!.appendData(data)
         
-        let dataBytes = data.byteArray
-        if dataBytes.count == 1 && ProgramProperties.fromRaw(dataBytes[0]) == ProgramProperties.EndTransmission {
+        if data.byteArray == endTransmissionPacket {
             programs = Program.buildPrograms(buffer!)
             onReceivedPrograms?(programs: programs)
             buffer = nil
+            lastDataReceivedAt = nil
+        } else {
+            NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: Selector("retry"), userInfo: nil, repeats: false)
         }
+    }
+    
+    func retry() {
+        if lastDataReceivedAt != nil && lastDataReceivedAt!.compare(NSDate(timeIntervalSinceNow: -5)) == NSComparisonResult.OrderedAscending {
+            NSLog("Retrying...")
+            disconnect()
+        }
+    }
+    
+    func disconnect() {
+        connected = false
+        
+        lastDataReceivedAt = nil
+        peripheral = nil
+        buffer = nil
+        
+        onDisconnect?()
+        scan()
     }
 }

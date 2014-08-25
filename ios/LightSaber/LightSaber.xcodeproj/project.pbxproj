@@ -16,7 +16,6 @@
 		FA3C4FA3198CABB30087F4FF /* BTLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3C4FA2198CABB30087F4FF /* BTLE.swift */; };
 		FA3C4FA5198CE6E50087F4FF /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3C4FA4198CE6E50087F4FF /* Program.swift */; };
 		FA3C4FA7198ED7570087F4FF /* NSData+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3C4FA6198ED7570087F4FF /* NSData+Custom.swift */; };
-		FA3C4FA9198ED8140087F4FF /* Array+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3C4FA8198ED8140087F4FF /* Array+Custom.swift */; };
 		FA7A68A51998322E00853012 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7A68A41998322E00853012 /* ChannelCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +43,6 @@
 		FA3C4FA2198CABB30087F4FF /* BTLE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTLE.swift; sourceTree = "<group>"; };
 		FA3C4FA4198CE6E50087F4FF /* Program.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		FA3C4FA6198ED7570087F4FF /* NSData+Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Custom.swift"; sourceTree = "<group>"; };
-		FA3C4FA8198ED8140087F4FF /* Array+Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Custom.swift"; sourceTree = "<group>"; };
 		FA7A68A41998322E00853012 /* ChannelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,7 +86,6 @@
 			isa = PBXGroup;
 			children = (
 				FA3C4FA6198ED7570087F4FF /* NSData+Custom.swift */,
-				FA3C4FA8198ED8140087F4FF /* Array+Custom.swift */,
 				FA3C4F83198CAB9D0087F4FF /* AppDelegate.swift */,
 				FA3C4F85198CAB9D0087F4FF /* MasterViewController.swift */,
 				FA3C4F87198CAB9D0087F4FF /* DetailViewController.swift */,
@@ -231,7 +228,6 @@
 				FA3C4FA3198CABB30087F4FF /* BTLE.swift in Sources */,
 				FA3C4F88198CAB9D0087F4FF /* DetailViewController.swift in Sources */,
 				FA3C4F86198CAB9D0087F4FF /* MasterViewController.swift in Sources */,
-				FA3C4FA9198ED8140087F4FF /* Array+Custom.swift in Sources */,
 				FA7A68A51998322E00853012 /* ChannelCell.swift in Sources */,
 				FA3C4F84198CAB9D0087F4FF /* AppDelegate.swift in Sources */,
 				FA3C4FA7198ED7570087F4FF /* NSData+Custom.swift in Sources */,

@@ -3,18 +3,24 @@
 
 #include <FastLED.h>
 #include <Adafruit_BLE_UART.h>
-#include "Switch.h"
+#include "Config.h"
 
-#define LED_COUNT 48
-#define POT_PIN 3
+#define MAX_CHANNELS 6
 
 typedef enum {
-  InfoTypeNewProgram      = 0x01,
-  InfoTypeEndTransmission = 0xFF,
-  InfoTypeID              = 0x02,
-  InfoTypeName            = 0x03,
-  InfoTypeVarRange        = 0x04
-} InfoType;
+  ProgPropNewProgram      = 0x01, // first byte of a new program description
+  ProgPropID              = 0x02, // next byte describes the ID number of this program
+  ProgPropName            = 0x03, // next byte is the program name length, followed by the name
+  ProgPropVarRange        = 0x04, // identifies channel as a range slider
+
+  ProgPropEndTransmission = 0xFF  // done with all program descriptions
+} ProgProp;
+
+typedef struct {
+  char *name;
+  ProgProp type;
+  uint8_t value;
+} Channel;
 
 static uint8_t nextId = 0;
 
@@ -24,8 +30,9 @@ class Program {
 
     uint8_t id;
     char *name;
+
     uint8_t numChannels;
-    uint8_t channelTypes[6];
+    Channel channels[MAX_CHANNELS];
 
     Program();
     void setup(CRGB leds[]);

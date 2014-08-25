@@ -3,8 +3,6 @@
 #include <Adafruit_BLE_UART.h>
 #include <FastLED.h>
 
-#include "Switch.h"
-
 #include "Program.h"
 
 // Eevery communication
@@ -13,13 +11,12 @@ typedef enum {
   CommandWriteVar   = 0x02
 } Command;
 
-#define LED_COUNT 48
 #define PROGRAM_COUNT 6
 
 #include "HueCrawl.h"
 #include "Sparkle.h"
-#include "SolidColor.h"
 #include "Flicker.h"
+#include "SolidColor.h"
 #include "Bubble.h"
 #include "Gauge.h"
 
@@ -46,8 +43,8 @@ void setup() {
 
   programs[0] = new HueCrawl();
   programs[1] = new Sparkle();
-  programs[2] = new SolidColor();
-  programs[3] = new Flicker();
+  programs[2] = new Flicker();
+  programs[3] = new SolidColor();
   programs[4] = new Bubble();
   programs[5] = new Gauge();
 
@@ -93,13 +90,20 @@ void handleSignal() {
 void sendProgramData() {
   for (uint8_t i = 0; i < PROGRAM_COUNT; i++) {
     programs[i]->sendDescriptor(&BTLEserial);
+    delay(35 * programs[i]->dataLen() / 20);
+    pollBTLE();
   }
-  BTLEserial.write(InfoTypeEndTransmission);
+
+  // Tell the client we are done sending data
+  delay(50);
+  BTLEserial.write(ProgPropEndTransmission);
 }
 
 void pollBTLE() {
   BTLEserial.pollACI();
   aci_evt_opcode_t status = BTLEserial.getState();
+
+  bool shouldSendProgramData = false;
 
   // If the status changed....
   if (status != BTLElastStatus) {
@@ -107,11 +111,10 @@ void pollBTLE() {
     if (status == ACI_EVT_DEVICE_STARTED) {
       Serial.println(F("* Advertising started"));
     }
+
     if (status == ACI_EVT_CONNECTED) {
       Serial.println(F("* Connected!"));
-
-      delay(1000);
-      sendProgramData();
+      shouldSendProgramData = true;
 
     }
     if (status == ACI_EVT_DISCONNECTED) {
@@ -120,5 +123,10 @@ void pollBTLE() {
     }
     // OK set the last status change to this one
     BTLElastStatus = status;
+  }
+
+  if (shouldSendProgramData) {
+    delay(100);
+    sendProgramData();
   }
 }
