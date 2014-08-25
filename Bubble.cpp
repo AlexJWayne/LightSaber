@@ -1,7 +1,7 @@
 #include "Bubble.h"
 
 void Bubble::start() {
-  name = "Bubble";
+  name = "Bubbles";
   numChannels = 2;
 
   channels[0].name = "Position";

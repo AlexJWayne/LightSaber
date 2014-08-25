@@ -41,7 +41,7 @@ class Program {
 
     void sendDescriptor(Adafruit_BLE_UART *bt);
     uint8_t dataLen();
-    virtual void writeChannel(uint8_t channelID, uint8_t value) {};
+    virtual void writeChannel(uint8_t channelID, uint8_t value);
     int mapDial(int min, int max);
 };
 

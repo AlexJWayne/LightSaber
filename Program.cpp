@@ -74,3 +74,7 @@ uint8_t Program::dataLen() {
     + strlen(name) // actual name
     + channelsSize; // channel data
 }
+
+void Program::writeChannel(uint8_t channelID, uint8_t value) {
+  channels[channelID].value = value;
+}

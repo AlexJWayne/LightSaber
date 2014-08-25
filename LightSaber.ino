@@ -11,11 +11,12 @@ typedef enum {
   CommandWriteVar   = 0x02
 } Command;
 
-#define PROGRAM_COUNT 6
+#define PROGRAM_COUNT 7
 
 #include "HueCrawl.h"
 #include "Sparkle.h"
 #include "Flicker.h"
+#include "Helix.h"
 #include "SolidColor.h"
 #include "Bubble.h"
 #include "Gauge.h"
@@ -44,9 +45,10 @@ void setup() {
   programs[0] = new HueCrawl();
   programs[1] = new Sparkle();
   programs[2] = new Flicker();
-  programs[3] = new SolidColor();
-  programs[4] = new Bubble();
-  programs[5] = new Gauge();
+  programs[3] = new Helix();
+  programs[4] = new SolidColor();
+  programs[5] = new Bubble();
+  programs[6] = new Gauge();
 
   for (uint8_t i = 0; i < PROGRAM_COUNT; i++) {
     programs[i]->setup(leds);
