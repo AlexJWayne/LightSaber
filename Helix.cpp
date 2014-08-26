@@ -15,7 +15,7 @@ void Helix::start() {
 
   channels[1].name = "Move Speed";
   channels[1].type = ProgPropVarRange;
-  channels[1].value = 127; // 0-255 mapped from min to max
+  channels[1].value = 32; // 0-255 mapped from min to max
 
   channels[2].name = "Hue Speed";
   channels[2].type = ProgPropVarRange;
