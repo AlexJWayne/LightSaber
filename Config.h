@@ -1,3 +1,3 @@
 #define PROTOCOL_VERSION 1
 
-#define LED_COUNT 48
+#define LED_COUNT 38

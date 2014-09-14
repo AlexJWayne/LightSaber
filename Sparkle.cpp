@@ -21,7 +21,7 @@ void Sparkle::update() {
   const byte maxThreshold = 1000;
   uint16_t threshold = lerp8by8(0, 1000, channels[0].value);
 
-  for (byte i = 0; i < 48; i++) {
+  for (byte i = 0; i < LED_COUNT; i++) {
     if (random16(20000) < threshold) {
       int8_t variation = random8(0, channels[2].value) - (channels[2].value >> 1);
       leds[i] = CHSV(channels[1].value + variation, random(0xFF), 0xFF);
