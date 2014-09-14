@@ -88,7 +88,7 @@ module outerBody() {
 module innerLip() {
   difference() {
     cylinder(h=tubeLipHeight, r=tubeRadius+tubeLip, $fn=360);
-    rotate([0, 0, 20])
+    rotate([0, 0, 10])
       translate([0, 0, floorThickness])
         hcCube(tubeRadius*2, tubeRadius*2, 500);
   }
